@@ -26,8 +26,9 @@
     "packages/adapters/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build:core && npm run build:engram && npm run build:cli && npm run build:mcp",
     "build:core": "npm run build --workspace=@contrailspec/core --if-present",
+    "build:engram": "npm run build --workspace=@contrailspec/engram --if-present",
     "build:cli": "npm run build --workspace=@contrailspec/cli --if-present",
     "build:mcp": "npm run build --workspace=@contrailspec/mcp --if-present",
     "test": "npm run test --workspaces --if-present",
