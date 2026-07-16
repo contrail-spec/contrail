@@ -1,5 +1,5 @@
 {
-  "name": "@contrailspec/engram",
+  "name": "@lukitadproxd-netizen/engram",
   "version": "0.0.0",
   "description": "Contrail ↔ Engram bidirectional adapter (stretch)",
   "type": "module",
@@ -29,7 +29,7 @@
     "dist"
   ],
   "dependencies": {
-    "@contrailspec/core": "file:../../core"
+    "@lukitadproxd-netizen/core": "file:../../core"
   },
   "devDependencies": {
     "@types/node": "^20.12.0",

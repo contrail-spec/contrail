@@ -36,7 +36,7 @@ The exact charter will be drafted *at* transition time with input from then-acti
 - The **spec** (`spec/`) is SemVer'd independently of code packages
 - Spec version appears in every claim's `schema_version` field
 - Spec changelog: `spec/CHANGELOG.md`
-- Code packages (`@contrailspec/core`, `@contrailspec/cli`, `@contrailspec/mcp`) follow their own SemVer but pin the spec version they implement in their README
+- Code packages (`@lukitadproxd-netizen/core`, `@lukitadproxd-netizen/cli`, `@lukitadproxd-netizen/mcp`) follow their own SemVer but pin the spec version they implement in their README
 
 ## Decision Making (v0.x)
 

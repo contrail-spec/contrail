@@ -13,7 +13,7 @@ Engram is a **signed envelope format with HTTP API**. Contrail is a **temporal c
 | Signing | Ed25519 (core) | v0.2+ (placeholder in v0.1) |
 | Adoption | Early, pre-v1 | Early, pre-v1 |
 
-**They compose:** Contrail's Engram adapter (`@contrailspec/engram`) round-trips claims ↔ envelopes. Engram's `CORRECTIONS` map directly to Contrail's `supersedes`.
+**They compose:** Contrail's Engram adapter (`@lukitadproxd-netizen/engram`) round-trips claims ↔ envelopes. Engram's `CORRECTIONS` map directly to Contrail's `supersedes`.
 
 ---
 
@@ -34,7 +34,7 @@ Contrail adds what OMP doesn't model:
 
 MCP solves **tool connectivity** (Resources/Tools/Prompts). It doesn't define **what a personal memory claim looks like**.
 
-Contrail defines the *shape of a belief*. The MCP adapter (`@contrailspec/mcp`) exposes that shape as:
+Contrail defines the *shape of a belief*. The MCP adapter (`@lukitadproxd-netizen/mcp`) exposes that shape as:
 - **Resource:** `contrail://claims` (read-only JSONL)
 - **Tool:** `contrail_remember(predicate, value, confidence?)`
 - **Tool:** `contrail_recall(predicate)` → current claim

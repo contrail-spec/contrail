@@ -43,7 +43,7 @@ Not storage (Mem0/Zep). Not transport (MCP). Not signing (Engram). The missing l
 
 ```bash
 # 1. Install
-npm install -g @contrailspec/cli
+npm install -g @lukitadproxd-netizen/cli
 
 # 2. Initialize a memory store
 contrail init
@@ -72,7 +72,7 @@ contrail log preference.editor
 contrail diff preference.editor
 
 # 8. Connect to Claude Code via MCP
-claude mcp add contrail -- npx @contrailspec/mcp
+claude mcp add contrail -- npx @lukitadproxd-netizen/mcp
 # In Claude Code: "What's my editor preference?"
 # → "You switched from vscode (0.9) to neovim (0.95) on July 16."
 ```
@@ -102,7 +102,7 @@ claude mcp add contrail -- npx @contrailspec/mcp
 
 ## MCP Adapter
 
-The `@contrailspec/mcp` package provides an MCP server with:
+The `@lukitadproxd-netizen/mcp` package provides an MCP server with:
 
 ### Resource
 
@@ -119,7 +119,7 @@ The `@contrailspec/mcp` package provides an MCP server with:
 ### MCP Server Usage
 
 ```typescript
-import { ContrailMCPServer } from '@contrailspec/mcp';
+import { ContrailMCPServer } from '@lukitadproxd-netizen/mcp';
 
 const server = new ContrailMCPServer({
   storePath: '/path/to/.contrail/claims.jsonl' // optional, defaults to cwd
@@ -228,7 +228,7 @@ Closed because filtering by provenance requires a known, finite set.
                │ MCP protocol
                ▼
 ┌─────────────────────────────────────┐
-│         @contrailspec/mcp           │
+│         @lukitadproxd-netizen/mcp           │
 │  MCP Server Adapter (flagship)      │
 │  - Resource: claims.jsonl           │
 │  - Tools: remember, recall, trajectory
@@ -236,14 +236,14 @@ Closed because filtering by provenance requires a known, finite set.
                │
                ▼
 ┌─────────────────────────────────────┐
-│        @contrailspec/core           │
+│        @lukitadproxd-netizen/core           │
 │  parse / validate / resolve / serialize
 └──────────────┬──────────────────────┘
                │
        ┌───────┴───────┐
        ▼               ▼
 ┌──────────────┐ ┌──────────────┐
-│ JSONL Store  │ │ @contrailspec/engram │
+│ JSONL Store  │ │ @lukitadproxd-netizen/engram │
 │ (git-native) │ │ (stretch)    │
 └──────────────┘ └──────────────┘
 ```
@@ -262,11 +262,11 @@ contrail/
 │               ├── valid/         # CI-enforced passing fixtures
 │               └── invalid/       # CI-enforced failing fixtures
 ├── packages/
-│   ├── core/                      # @contrailspec/core
-│   ├── cli/                       # @contrailspec/cli (bin: contrail)
+│   ├── core/                      # @lukitadproxd-netizen/core
+│   ├── cli/                       # @lukitadproxd-netizen/cli (bin: contrail)
 │   ├── adapters/
-│   │   ├── mcp/                   # @contrailspec/mcp (flagship)
-│   │   └── engram/                # @contrailspec/engram (stretch)
+│   │   ├── mcp/                   # @lukitadproxd-netizen/mcp (flagship)
+│   │   └── engram/                # @lukitadproxd-netizen/engram (stretch)
 ├── examples/
 │   └── coding-assistant-memory/   # Runnable demo
 ├── docs/

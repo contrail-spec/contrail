@@ -1,5 +1,5 @@
 {
-  "name": "@contrailspec/mcp",
+  "name": "@lukitadproxd-netizen/mcp",
   "version": "0.0.0",
   "description": "Contrail MCP server adapter — exposes claims as resource + tools",
   "type": "module",
@@ -29,7 +29,7 @@
     "dist"
   ],
   "dependencies": {
-    "@contrailspec/core": "file:../../core",
+    "@lukitadproxd-netizen/core": "file:../../core",
     "@modelcontextprotocol/sdk": "^1.0.0",
     "zod": "^3.23.0"
   },

@@ -1,5 +1,5 @@
 {
-  "name": "@contrailspec/core",
+  "name": "@lukitadproxd-netizen/core",
   "version": "0.0.0",
   "description": "Contrail core library — parse, validate, resolve trajectories, serialize",
   "type": "module",

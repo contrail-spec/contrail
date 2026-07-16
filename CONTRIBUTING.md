@@ -7,7 +7,7 @@ with this repository effectively.
 
 ```bash
 # Prerequisites: Node.js >= 20, npm >= 10
-git clone https://github.com/contrailspec/contrail.git
+git clone https://github.com/lukitadproxd-netizen/contrail.git
 cd contrail
 npm ci
 npm run build

@@ -4,7 +4,7 @@
 
 ```bash
 # Install
-npm install -g @contrailspec/cli
+npm install -g @lukitadproxd-netizen/cli
 
 # Initialize a store
 contrail init
@@ -20,7 +20,7 @@ contrail log preference.editor
 
 ```bash
 # Add MCP server
-claude mcp add contrail -- npx @contrailspec/mcp
+claude mcp add contrail -- npx @lukitadproxd-netizen/mcp
 
 # In Claude Code:
 # "What's my editor preference?"

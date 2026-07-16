@@ -5,13 +5,13 @@
   "description": "Contrail — A vapor trail for what an AI knows about you",
   "repository": {
     "type": "git",
-    "url": "https://github.com/contrailspec/contrail.git"
+    "url": "https://github.com/lukitadproxd-netizen/contrail.git"
   },
   "license": "Apache-2.0",
   "author": "Contrail Contributors",
-  "homepage": "https://contrailspec.dev",
+  "homepage": "https://lukitadproxd-netizen.github.io/contrail",
   "bugs": {
-    "url": "https://github.com/contrailspec/contrail/issues"
+    "url": "https://github.com/lukitadproxd-netizen/contrail/issues"
   },
   "keywords": [
     "ai-memory",
@@ -27,14 +27,15 @@
   ],
   "scripts": {
     "build": "npm run build:core && npm run build:engram && npm run build:cli && npm run build:mcp",
-    "build:core": "npm run build --workspace=@contrailspec/core --if-present",
-    "build:engram": "npm run build --workspace=@contrailspec/engram --if-present",
-    "build:cli": "npm run build --workspace=@contrailspec/cli --if-present",
-    "build:mcp": "npm run build --workspace=@contrailspec/mcp --if-present",
+    "build:core": "npm run build --workspace=@lukitadproxd-netizen/core --if-present",
+    "build:engram": "npm run build --workspace=@lukitadproxd-netizen/engram --if-present",
+    "build:cli": "npm run build --workspace=@lukitadproxd-netizen/cli --if-present",
+    "build:mcp": "npm run build --workspace=@lukitadproxd-netizen/mcp --if-present",
     "test": "npm run test --workspaces --if-present",
-    "test:core": "npm run test --workspace=@contrailspec/core --if-present",
-    "test:cli": "npm run test --workspace=@contrailspec/cli --if-present",
-    "test:mcp": "npm run test --workspace=@contrailspec/mcp --if-present",
+    "test:core": "npm run test --workspace=@lukitadproxd-netizen/core --if-present",
+    "test:cli": "npm run test --workspace=@lukitadproxd-netizen/cli --if-present",
+    "test:mcp": "npm run test --workspace=@lukitadproxd-netizen/mcp --if-present",
+    "test:engram": "npm run test --workspace=@lukitadproxd-netizen/engram --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "validate:spec": "node scripts/validate-examples.js",
