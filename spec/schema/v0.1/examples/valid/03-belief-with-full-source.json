@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9B3C4D5E6F7G8H9I0J1K2L3",
+  "subject": "self",
+  "predicate": "belief.architecture.style",
+  "value": "event-sourced",
+  "confidence": 0.85,
+  "value_type": "string",
+  "valid_from": "2026-01-15T10:30:00Z",
+  "valid_until": null,
+  "supersedes": null,
+  "source": {
+    "tool": "contrail-cli",
+    "session_id": null,
+    "kind": "explicit-statement"
+  },
+  "visibility": "private",
+  "signature": null
+}

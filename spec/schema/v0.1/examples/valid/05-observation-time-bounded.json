@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9D5E6F7G8H9I0J1K2L3M4N5",
+  "subject": "self",
+  "predicate": "observation.session.quality",
+  "value": "high",
+  "value_type": "enum",
+  "confidence": 0.7,
+  "valid_from": "2026-07-16T14:22:00Z",
+  "valid_until": "2026-07-16T15:00:00Z",
+  "supersedes": null,
+  "source": {
+    "tool": "claude-code",
+    "session_id": "sess_xyz789",
+    "kind": "inferred"
+  },
+  "visibility": "private",
+  "signature": null
+}

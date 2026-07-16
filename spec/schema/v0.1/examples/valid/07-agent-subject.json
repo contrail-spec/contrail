@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9F7G8H9I0J1K2L3M4N5O6P7",
+  "subject": "agent:claude-code",
+  "predicate": "preference.response_style",
+  "value": "concise",
+  "confidence": 0.9,
+  "source": {
+    "tool": "contrail-cli",
+    "session_id": "agent-config",
+    "kind": "explicit-statement"
+  }
+}

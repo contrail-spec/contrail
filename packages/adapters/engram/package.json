@@ -1,0 +1,38 @@
+{
+  "name": "@contrailspec/engram",
+  "version": "0.0.0",
+  "description": "Contrail ↔ Engram bidirectional adapter (stretch)",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --if-present",
+    "test:watch": "vitest --if-present",
+    "lint": "eslint src --ext .ts --if-present",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "contrail",
+    "engram",
+    "adapter",
+    "interop"
+  ],
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@contrailspec/core": "file:../../core"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0"
+  }
+}

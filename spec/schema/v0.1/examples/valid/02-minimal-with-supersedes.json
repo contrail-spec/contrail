@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9A2B3C4D5E6F7G8H9I0J1K2",
+  "subject": "self",
+  "predicate": "preference.editor",
+  "value": "neovim",
+  "confidence": 0.95,
+  "supersedes": "01J9Z8QK3N4R5S6T7V8W9X0Y1Z"
+}

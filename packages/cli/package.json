@@ -1,0 +1,43 @@
+{
+  "name": "@contrailspec/cli",
+  "version": "0.0.0",
+  "description": "Contrail CLI — init, add, log, validate, diff",
+  "bin": {
+    "contrail": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --if-present",
+    "test:watch": "vitest --if-present",
+    "lint": "eslint src --ext .ts --if-present",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx src/cli.ts"
+  },
+  "keywords": [
+    "contrail",
+    "cli",
+    "ai-memory"
+  ],
+  "license": "Apache-2.0",
+  "files": [
+    "dist"
+  ],
+"dependencies": {
+    "@contrailspec/core": "file:../core",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0",
+    "tsx": "^4.7.0"
+  }
+}

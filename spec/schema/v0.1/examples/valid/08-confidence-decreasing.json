@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9G8H9I0J1K2L3M4N5O6P7Q8",
+  "subject": "self",
+  "predicate": "preference.code_style.paradigm",
+  "value": "object-oriented",
+  "value_type": "enum",
+  "confidence": 0.3,
+  "valid_from": "2026-07-16T11:00:00Z",
+  "valid_until": null,
+  "supersedes": "01J9A2B3C4D5E6F7G8H9I0J1K2",
+  "source": {
+    "tool": "claude-code",
+    "session_id": "sess_new",
+    "kind": "corrected"
+  },
+  "visibility": "private",
+  "signature": null
+}

@@ -1,0 +1,54 @@
+{
+  "name": "contrail",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Contrail — A vapor trail for what an AI knows about you",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/contrailspec/contrail.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Contrail Contributors",
+  "homepage": "https://contrailspec.dev",
+  "bugs": {
+    "url": "https://github.com/contrailspec/contrail/issues"
+  },
+  "keywords": [
+    "ai-memory",
+    "mcp",
+    "interoperability",
+    "json-schema",
+    "temporal",
+    "confidence"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "build:core": "npm run build --workspace=@contrailspec/core --if-present",
+    "build:cli": "npm run build --workspace=@contrailspec/cli --if-present",
+    "build:mcp": "npm run build --workspace=@contrailspec/mcp --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:core": "npm run test --workspace=@contrailspec/core --if-present",
+    "test:cli": "npm run test --workspace=@contrailspec/cli --if-present",
+    "test:mcp": "npm run test --workspace=@contrailspec/mcp --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "validate:spec": "node scripts/validate-examples.js",
+    "dev": "npm run dev --workspaces --if-present",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.12.0",
+    "typescript": "^5.4.0",
+    "ajv": "^8.12.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm@10.8.0"
+}

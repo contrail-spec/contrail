@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9A2B3C4D5E6F7G8H9I0J1K2",
+  "subject": "self",
+  "predicate": "preference.code_style.paradigm",
+  "value": "neovim",
+  "value_type": "enum",
+  "confidence": 0.95,
+  "valid_from": "2026-07-16T11:00:00Z",
+  "valid_until": null,
+  "supersedes": "01J9Z8QK3N4R5S6T7V8W9X0Y1Z",
+  "source": {
+    "tool": "claude-code",
+    "session_id": "sess_c3d4",
+    "kind": "explicit-statement"
+  },
+  "visibility": "private",
+  "signature": null
+}

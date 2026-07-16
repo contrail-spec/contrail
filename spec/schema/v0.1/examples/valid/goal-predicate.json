@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9F7G8H9I0J1K2L3M4N5O6P7",
+  "subject": "self",
+  "predicate": "goal.active.merlo360",
+  "value": "launch v0.1",
+  "value_type": "string",
+  "confidence": 0.9,
+  "valid_from": "2026-07-01T00:00:00Z",
+  "valid_until": null,
+  "supersedes": null,
+  "source": {
+    "tool": "contrail-cli",
+    "session_id": null,
+    "kind": "explicit-statement"
+  },
+  "visibility": "private",
+  "signature": null
+}

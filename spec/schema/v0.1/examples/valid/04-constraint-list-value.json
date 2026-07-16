@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9C4D5E6F7G8H9I0J1K2L3M4",
+  "subject": "self",
+  "predicate": "constraint.language.supported",
+  "value": ["typescript", "python"],
+  "value_type": "list",
+  "confidence": 1.0,
+  "valid_from": "2026-01-01T00:00:00Z",
+  "valid_until": null,
+  "supersedes": null,
+  "source": {
+    "tool": "contrail-cli",
+    "session_id": "init-session",
+    "kind": "explicit-statement"
+  },
+  "visibility": "private",
+  "signature": null
+}

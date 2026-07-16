@@ -1,0 +1,7 @@
+{
+  "schema_version": "0.1.0",
+  "subject": "self",
+  "predicate": "preference.code_style.paradigm",
+  "value": "functional-composition",
+  "confidence": 0.9
+}

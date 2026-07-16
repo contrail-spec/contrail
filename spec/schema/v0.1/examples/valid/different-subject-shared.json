@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9D5E6F7G8H9I0J1K2L3M4N5",
+  "subject": "agent:claude-code",
+  "predicate": "preference.editor",
+  "value": "vscode",
+  "value_type": "enum",
+  "confidence": 0.8,
+  "valid_from": "2026-05-01T00:00:00Z",
+  "valid_until": null,
+  "supersedes": null,
+  "source": {
+    "tool": "contrail-cli",
+    "session_id": null,
+    "kind": "imported"
+  },
+  "visibility": "shared",
+  "signature": null
+}

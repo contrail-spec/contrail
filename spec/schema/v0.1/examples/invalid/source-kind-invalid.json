@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.1.0",
+  "id": "01J9Z8QK3N4R5S6T7V8W9X0Y1Z",
+  "subject": "self",
+  "predicate": "preference.code_style.paradigm",
+  "value": "functional-composition",
+  "confidence": 0.9,
+  "source": {
+    "tool": "claude-code",
+    "session_id": "sess_a1b2",
+    "kind": "unknown-kind"
+  }
+}
