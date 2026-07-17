@@ -15,7 +15,7 @@ This is a realistic seed file for a developer's personal Contrail store.
 
 ```bash
 # Copy to your Contrail store
-cp seed-claims.jsonl .contrail/claims.jsonl
+cp seed.jsonl .contrail/claims.jsonl
 
 # View all trajectories
 contrail log

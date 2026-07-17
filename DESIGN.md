@@ -250,7 +250,7 @@ contrail/
 ├── examples/
 │   └── coding-assistant-memory/    # THE flagship demo — runnable end to end
 │       ├── README.md               # "5 minutes: point Claude Code at this"
-│       └── seed-claims.jsonl
+│       └── seed.jsonl
 ├── docs/                           # single documentation surface — no separate "website/" dir
 │   ├── index.md                    # quickstart, published via GitHub Pages, plain markdown
 │   ├── spec-explorer.md            # human-readable walk-through of the schema
