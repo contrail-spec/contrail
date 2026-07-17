@@ -278,6 +278,21 @@ contrail/
 └── .github/workflows/ci.yml       # Lint, test, spec-validate
 ```
 
+## Known Limitations
+
+Contrail's default store (`.contrail/claims.jsonl`) is a flat JSONL file
+with no indexing. Every read loads and parses the entire file into
+memory. Measured on a local benchmark (`scripts/bench-large-store.mjs`):
+
+| Claims  | Write Time | Read Time |
+|---------|------------|-----------|
+| 10,000  | 4933ms | 39ms |
+
+Practical recommendation: this store is comfortable for interactive use
+up to roughly 10,000 claims. Beyond that, reads stay linear in file size
+with no indexing, so latency grows proportionally. A SQLite-backed store
+is tracked as a v0.2+ candidate in ROADMAP.md.
+
 ## Related Standards
 
 | Standard | Relationship |
