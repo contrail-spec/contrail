@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import type { Claim } from '@lukitadproxd-netizen/core';
 import { convertToEngram, convertFromEngram } from '../dist/index.js';
 
 describe('Engram Adapter (v0.1)', () => {
@@ -89,96 +88,7 @@ describe('Engram Adapter (v0.1)', () => {
     expect(envelope.CORRECTIONS![0].supersedes).toBe('01PREVIOUS1234567890ABCDE');
   });
 
-  it('convertFromEngram converts identity envelope', () => {
-    const envelope = {
-      IDENTITY: { name: 'Jane Doe' },
-      BELIEFS: {},
-      CONSTRAINTS: {},
-      CORRECTIONS: [],
-      EVOLUTION: [],
-      signature: null
-    };
-
-    const claims = convertFromEngram(envelope);
-    expect(claims).toHaveLength(1);
-    expect(claims[0].predicate).toBe('identity.name');
-    expect(claims[0].value).toBe('Jane Doe');
-    expect(claims[0].source.kind).toBe('imported');
-  });
-
-  it('convertFromEngram converts belief envelope', () => {
-    const envelope = {
-      IDENTITY: {},
-      BELIEFS: { 'architecture.style': 'hexagonal' },
-      CONSTRAINTS: {},
-      CORRECTIONS: [],
-      EVOLUTION: [],
-      signature: null
-    };
-
-    const claims = convertFromEngram(envelope);
-    expect(claims).toHaveLength(1);
-    expect(claims[0].predicate).toBe('belief.architecture.style');
-    expect(claims[0].value).toBe('hexagonal');
-  });
-
-  it('convertFromEngram converts constraint envelope with confidence', () => {
-    const envelope = {
-      IDENTITY: {},
-      BELIEFS: {},
-      CONSTRAINTS: { 'language.required': { value: true, confidence: 1.0 } },
-      CORRECTIONS: [],
-      EVOLUTION: [],
-      signature: null
-    };
-
-    const claims = convertFromEngram(envelope);
-    expect(claims).toHaveLength(1);
-    expect(claims[0].predicate).toBe('constraint.language.required');
-    expect(claims[0].confidence).toBe(1.0);
-  });
-
-  it('convertFromEngram merges EVOLUTION with other sections instead of discarding them', () => {
-    const envelope = {
-      IDENTITY: { name: 'Lucas' },
-      BELIEFS: { likes_coffee: true },
-      EVOLUTION: [
-        { id: 'X1', predicate: 'foo.bar', value: 1 } as unknown as Claim
-      ]
-    };
-    const result = convertFromEngram(envelope);
-    const predicates = result.map(c => c.predicate).sort();
-    expect(predicates).toEqual(['belief.likes_coffee', 'foo.bar', 'identity.name'].sort());
-  });
-
-  it('convertFromEngram returns EVOLUTION array if present', () => {
-    const evolutionClaim = {
-      schema_version: '0.1.0',
-      id: '01EVOLUTION1234567890ABCDE',
-      subject: 'self',
-      predicate: 'preference.editor',
-      value: 'vscode',
-      value_type: 'string',
-      confidence: 0.8,
-      valid_from: '2026-01-01T00:00:00Z',
-      valid_until: null,
-      supersedes: null,
-      source: { tool: 'test', session_id: null, kind: 'explicit-statement' },
-      visibility: 'private',
-      signature: null
-    };
-
-    const envelope = {
-      IDENTITY: {},
-      BELIEFS: {},
-      CONSTRAINTS: {},
-      CORRECTIONS: [],
-      EVOLUTION: [evolutionClaim],
-      signature: null
-    };
-
-    const claims = convertFromEngram(envelope);
-    expect(claims).toHaveLength(1);
-    expect(claims[0].id).toBe('01EVOLUTION1234567890ABCDE');
+  it('convertFromEngram throws a clear not-implemented error', () => {
+    expect(() => convertFromEngram({ IDENTITY: { x: 1 } })).toThrow('not implemented');
   });
 });

@@ -73,119 +73,21 @@ export function convertToEngram(
 
 /**
  * Converts an Engram envelope back to Contrail Claims.
- * Lossy: signature is preserved as opaque blob, confidence on constraints is lost.
+ *
+ * NOT IMPLEMENTED. This direction requires the official Engram schema to
+ * confirm field names, section semantics, and confidence-loss rules. The
+ * previous implementation of this function assumed a schema shape that was
+ * never confirmed against a real Engram spec, which is worse than an
+ * explicit stub: it could silently produce claims that look valid but
+ * don't actually round-trip correctly with real Engram data.
+ *
+ * Tracked in: https://github.com/lukitadproxd-netizen/contrail/issues/6
  */
-export function convertFromEngram(envelope: EngramEnvelope): Claim[] {
-  const claims: Claim[] = [];
-
-  // IDENTITY claims
-  if (envelope.IDENTITY) {
-    for (const [key, value] of Object.entries(envelope.IDENTITY)) {
-      claims.push({
-        schema_version: '0.1.0',
-        id: generateULID(),
-        subject: 'self',
-        predicate: `identity.${key}`,
-        value,
-        value_type: typeof value === 'number' ? 'number' :
-                    typeof value === 'boolean' ? 'boolean' :
-                    Array.isArray(value) ? 'list' : 'string',
-        confidence: 0.9,
-        valid_from: new Date().toISOString(),
-        valid_until: null,
-        supersedes: null,
-        source: {
-          tool: 'engram-adapter',
-          session_id: null,
-          kind: 'imported'
-        },
-        visibility: 'private',
-        signature: envelope.signature ?? null
-      });
-    }
-  }
-
-  // BELIEFS claims
-  if (envelope.BELIEFS) {
-    for (const [key, value] of Object.entries(envelope.BELIEFS)) {
-      claims.push({
-        schema_version: '0.1.0',
-        id: generateULID(),
-        subject: 'self',
-        predicate: `belief.${key}`,
-        value,
-        value_type: typeof value === 'number' ? 'number' :
-                    typeof value === 'boolean' ? 'boolean' :
-                    Array.isArray(value) ? 'list' : 'string',
-        confidence: 0.9,
-        valid_from: new Date().toISOString(),
-        valid_until: null,
-        supersedes: null,
-        source: {
-          tool: 'engram-adapter',
-          session_id: null,
-          kind: 'imported'
-        },
-        visibility: 'private',
-        signature: envelope.signature ?? null
-      });
-    }
-  }
-
-  // CONSTRAINTS claims
-  if (envelope.CONSTRAINTS) {
-    for (const [key, constraint] of Object.entries(envelope.CONSTRAINTS)) {
-      const value = constraint.value;
-      const confidence = constraint.confidence ?? 1.0;
-      claims.push({
-        schema_version: '0.1.0',
-        id: generateULID(),
-        subject: 'self',
-        predicate: `constraint.${key}`,
-        value,
-        value_type: typeof value === 'number' ? 'number' :
-                    typeof value === 'boolean' ? 'boolean' :
-                    Array.isArray(value) ? 'list' : 'string',
-        confidence,
-        valid_from: new Date().toISOString(),
-        valid_until: null,
-        supersedes: null,
-        source: {
-          tool: 'engram-adapter',
-          session_id: null,
-          kind: 'imported'
-        },
-        visibility: 'private',
-        signature: envelope.signature ?? null
-      });
-    }
-  }
-
-  // CORRECTIONS
-  if (envelope.CORRECTIONS) {
-    for (const correction of envelope.CORRECTIONS) {
-      const claim = correction.claim;
-      claim.id = generateULID();
-      claim.source = {
-        tool: 'engram-adapter',
-        session_id: null,
-        kind: 'imported'
-      };
-      claim.signature = envelope.signature ?? null;
-      claims.push(claim);
-    }
-  }
-
-  // Merge EVOLUTION (full trajectory, source of truth when present) with
-  // claims reconstructed from IDENTITY/BELIEFS/CONSTRAINTS/CORRECTIONS.
-  // EVOLUTION wins on predicate collisions because it carries the real
-  // supersedes chain; the other sections only produce single-claim
-  // reconstructions with no history.
-  const evolutionClaims = envelope.EVOLUTION ?? [];
-  const evolutionPredicates = new Set(evolutionClaims.map(c => c.predicate));
-  const nonDuplicateClaims = claims.filter(c => !evolutionPredicates.has(c.predicate));
-
-  return [...evolutionClaims, ...nonDuplicateClaims];
+export function convertFromEngram(_envelope: EngramEnvelope): Claim[] {
+  throw new Error(
+    'convertFromEngram is not implemented in v0.1: requires official Engram schema confirmation. ' +
+    'See ROADMAP.md and the tracking issue linked in this function\'s doc comment.'
+  );
 }
 
 function generateULID(): string {

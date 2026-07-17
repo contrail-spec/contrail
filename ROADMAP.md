@@ -12,7 +12,8 @@
 - [x] @contrailspec/core: parse, validate, resolveTrajectory, serialize
 - [x] @contrailspec/cli: init, add, log, validate, diff
 - [x] @contrailspec/mcp: resource + 3 tools (remember, recall, trajectory)
-- [x] @contrailspec/engram: bidirectional adapter (convertToEngram, convertFromEngram)
+- [x] @lukitadproxd-netizen/engram: convertToEngram (Contrail → Engram), implemented per SPEC.md §8
+- [ ] @lukitadproxd-netizen/engram: convertFromEngram (Engram → Contrail), blocked on official Engram schema — see https://github.com/lukitadproxd-netizen/contrail/issues/6
 - [x] 25/25 spec fixtures validated
 - [x] 38 tests passing across 4 packages
 
