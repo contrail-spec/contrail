@@ -176,14 +176,16 @@ export function convertFromEngram(envelope: EngramEnvelope): Claim[] {
     }
   }
 
-  // EVOLUTION (full trajectory)
-  if (envelope.EVOLUTION && envelope.EVOLUTION.length > 0) {
-    // The EVOLUTION array already contains the full trajectory
-    // Return as-is (they already have the proper Contrail structure)
-    return envelope.EVOLUTION;
-  }
+  // Merge EVOLUTION (full trajectory, source of truth when present) with
+  // claims reconstructed from IDENTITY/BELIEFS/CONSTRAINTS/CORRECTIONS.
+  // EVOLUTION wins on predicate collisions because it carries the real
+  // supersedes chain; the other sections only produce single-claim
+  // reconstructions with no history.
+  const evolutionClaims = envelope.EVOLUTION ?? [];
+  const evolutionPredicates = new Set(evolutionClaims.map(c => c.predicate));
+  const nonDuplicateClaims = claims.filter(c => !evolutionPredicates.has(c.predicate));
 
-  return claims;
+  return [...evolutionClaims, ...nonDuplicateClaims];
 }
 
 function generateULID(): string {
