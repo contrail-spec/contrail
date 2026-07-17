@@ -9,16 +9,16 @@
 
 ### v0.1.0 (Released)
 - [x] Core schema v0.1.0 frozen
-- [x] @contrailspec/core: parse, validate, resolveTrajectory, serialize
-- [x] @contrailspec/cli: init, add, log, validate, diff
-- [x] @contrailspec/mcp: resource + 3 tools (remember, recall, trajectory)
+- [x] @lukitadproxd-netizen/core: parse, validate, resolveTrajectory, serialize
+- [x] @lukitadproxd-netizen/cli: init, add, log, validate, diff
+- [x] @lukitadproxd-netizen/mcp: resource + 3 tools (remember, recall, trajectory)
 - [x] @lukitadproxd-netizen/engram: convertToEngram (Contrail → Engram), implemented per SPEC.md §8
 - [ ] @lukitadproxd-netizen/engram: convertFromEngram (Engram → Contrail), blocked on official Engram schema — see https://github.com/lukitadproxd-netizen/contrail/issues/6
 - [x] 25/25 spec fixtures validated
 - [x] 38 tests passing across 4 packages
 
 ### v0.1.1 (Target: Q3 2026)
-- [ ] SQLite backend for @contrailspec/cli (optional, for >10k claims)
+- [ ] SQLite backend for @lukitadproxd-netizen/cli (optional, for >10k claims)
 - [ ] `contrail migrate` CLI command with dry-run
 - [ ] Streaming JSONL parser for large files
 - [ ] Windows CI pipeline (currently Linux/macOS only)
