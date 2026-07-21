@@ -1,0 +1,18 @@
+repository/project.testing.framework
+
+CURRENT INSTRUCTION
+  "Use Vitest."
+  Current since: 2026-06-15T14:30:00Z
+  Source: project-maintainer (corrected)
+  Recorded confidence: 0.98
+  Claim: 01J00000000000000000000001
+
+WHY THIS IS CURRENT
+  This claim supersedes 01J00000000000000000000000, so it is the current instruction.
+  Previous instruction: "Use Node's built-in test runner."
+
+REASONING CHAIN (oldest → current)
+  1. [superseded] "Use Node's built-in test runner."
+     2026-01-10T09:00:00Z | project-maintainer (explicit-statement) | confidence 0.90 | 01J00000000000000000000000
+  2. [current] "Use Vitest."
+     2026-06-15T14:30:00Z | project-maintainer (corrected) | confidence 0.98 | 01J00000000000000000000001
