@@ -38,10 +38,12 @@ export function resolveTrajectory(
   }
 
   if (heads.length > 1) {
-    throw { 
+    const err: TrajectoryResolutionError = { 
       code: 'MULTIPLE_HEADS', 
-      message: `Multiple heads detected for ${subject}/${predicate}: ${heads.map(h => h.id).join(', ')}` 
-    } as TrajectoryResolutionError;
+      message: `Multiple heads detected for ${subject}/${predicate}: ${heads.map(h => h.id).join(', ')}`,
+      heads
+    };
+    throw err;
   }
 
   // Walk the chain from head backwards through supersedes

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { resolveTrajectory, getCurrentClaim, getSupersessionChain, isHead, getAllTrajectories, resolveCurrentBelief } from '../src/trajectory.js';
-import type { Claim, TrajectoryResolutionError } from '../src/types.js';
+import type { Claim, TrajectoryResolutionError, BeliefResolution } from '../src/types.js';
 
 function createClaim(overrides: Partial<Claim> = {}): Claim {
   return {
@@ -143,7 +143,33 @@ describe('getAllTrajectories', () => {
       createClaim({ id: '01JCCCCCCCCCCCCCCCCCCCCCCC', subject: 'self', predicate: 'preference.theme' })
     ];
     const trajectories = getAllTrajectories(claims);
-    // 3 unique (subject|predicate) pairs: self|preference.editor, other|preference.editor, self|preference.theme
     expect(trajectories.size).toBe(3);
+  });
+});
+
+describe('resolveCurrentBelief error handling', () => {
+  it('returns null for NO_HEAD instead of throwing', () => {
+    const claims = [createClaim({ id: '01JAAAAAAAAAAAAAAAAAAAAAAA', predicate: 'preference.editor' })];
+    const result = resolveCurrentBelief(claims, 'self', 'preference.theme');
+    expect(result).toBeNull();
+  });
+
+  it('throws MULTIPLE_HEADS with head claim details when two claims supersede the same parent', () => {
+    const base = createClaim({ id: '01JAAAAAAAAAAAAAAAAAAAAAAA' });
+    const headA = createClaim({ id: '01JBBBBBBBBBBBBBBBBBBBBBBB', supersedes: '01JAAAAAAAAAAAAAAAAAAAAAAA', value: 'vscode', confidence: 0.9, source: { tool: 'tool-a', session_id: null, kind: 'corrected' } });
+    const headB = createClaim({ id: '01JCCCCCCCCCCCCCCCCCCCCCCC', supersedes: '01JAAAAAAAAAAAAAAAAAAAAAAA', value: 'neovim', confidence: 0.95, source: { tool: 'tool-b', session_id: null, kind: 'corrected' } });
+    const claims = [base, headA, headB];
+
+    try {
+      resolveCurrentBelief(claims, 'self', 'preference.editor');
+      expect.fail('Should have thrown MULTIPLE_HEADS');
+    } catch (e) {
+      const err = e as TrajectoryResolutionError;
+      expect(err.code).toBe('MULTIPLE_HEADS');
+      expect(err.heads).toBeDefined();
+      expect(err.heads).toHaveLength(2);
+      expect(err.heads![0].id).toBe('01JBBBBBBBBBBBBBBBBBBBBBBB');
+      expect(err.heads![1].id).toBe('01JCCCCCCCCCCCCCCCCCCCCCCC');
+    }
   });
 });

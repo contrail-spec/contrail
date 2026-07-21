@@ -3,8 +3,8 @@ import { readFileSync, appendFileSync, existsSync, mkdirSync, writeFileSync } fr
 import { resolve } from 'path';
 import { lock, unlock } from 'proper-lockfile';
 import { z } from 'zod';
-import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@lukitadproxd-netizen/core';
-import type { Claim } from '@lukitadproxd-netizen/core';
+import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@lucas-contrial/core';
+import type { Claim, TrajectoryResolutionError } from '@lucas-contrial/core';
 
 const STORE_DIR = '.contrail';
 const STORE_FILE = 'claims.jsonl';
@@ -105,6 +105,27 @@ function generateULID(): string {
   }
   
   return timestampStr + randomStr;
+}
+
+function formatTrajectoryMCPError(error: TrajectoryResolutionError): string {
+  switch (error.code) {
+    case 'MULTIPLE_HEADS': {
+      const pieces = [`Conflicting claims detected — ${error.message}`];
+      if (error.heads && error.heads.length > 0) {
+        for (const head of error.heads) {
+          pieces.push(`  ${head.id}: "${String(head.value)}" (confidence ${head.confidence}, source: ${head.source?.tool ?? 'unknown'})`);
+        }
+      }
+      pieces.push('Resolve manually: add a new claim with the correct supersedes chain.');
+      return pieces.join('\n');
+    }
+    case 'CYCLE_DETECTED':
+      return `Cycle detected in supersedes chain${error.claimId ? ` at claim ${error.claimId}` : ''}.`;
+    case 'BROKEN_CHAIN':
+      return `Broken supersedes chain — missing claim ${error.claimId ?? 'unknown'}.`;
+    default:
+      return error.message;
+  }
 }
 
 export class ContrailMCPServer {
@@ -210,7 +231,16 @@ export class ContrailMCPServer {
     const recallHandler = async (args: Record<string, unknown>) => {
       const a = args as RecallArgs;
       const claims = readClaims(this.storePath);
-      const belief = resolveCurrentBelief(claims, a.subject, a.predicate);
+      let belief;
+      try {
+        belief = resolveCurrentBelief(claims, a.subject, a.predicate);
+      } catch (e) {
+        const err = e as TrajectoryResolutionError;
+        return {
+          content: [{ type: 'text' as const, text: formatTrajectoryMCPError(err) }],
+          isError: true
+        };
+      }
       
       if (!belief) {
         return {
@@ -247,7 +277,16 @@ export class ContrailMCPServer {
     const trajectoryHandler = async (args: Record<string, unknown>) => {
       const a = args as TrajectoryArgs;
       const claims = readClaims(this.storePath);
-      const trajectory = resolveTrajectory(claims, a.subject, a.predicate);
+      let trajectory;
+      try {
+        trajectory = resolveTrajectory(claims, a.subject, a.predicate);
+      } catch (e) {
+        const err = e as TrajectoryResolutionError;
+        return {
+          content: [{ type: 'text' as const, text: formatTrajectoryMCPError(err) }],
+          isError: true
+        };
+      }
       
       if (trajectory.claims.length === 0) {
         return {

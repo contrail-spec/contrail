@@ -1,7 +1,7 @@
 import { Command } from 'commander';
 import { createStore, generateULID, type Store } from './index.js';
-import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@lukitadproxd-netizen/core';
-import type { Claim } from '@lukitadproxd-netizen/core';
+import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@lucas-contrial/core';
+import type { Claim, TrajectoryResolutionError } from '@lucas-contrial/core';
 
 const program = new Command();
 
@@ -23,8 +23,45 @@ function formatTimestamp(claim: Claim): string {
   return claim.valid_from ?? 'not recorded';
 }
 
+function printTrajectoryError(error: TrajectoryResolutionError): void {
+  switch (error.code) {
+    case 'MULTIPLE_HEADS': {
+      const subject = error.message.match(/for (.+):/)?.[1] ?? 'unknown';
+      console.error(`⚠ Conflicting claims detected for ${subject}`);
+      if (error.heads && error.heads.length > 0) {
+        for (const head of error.heads) {
+          console.error(`   - ${head.id} "${String(head.value)}" (confidence ${head.confidence}, source: ${head.source?.tool ?? 'unknown'})`);
+        }
+      }
+      console.error('  Resolve manually: choose which claim should be current,');
+      console.error('  then add a new claim with the correct `supersedes` chain.');
+      process.exitCode = 1;
+      return;
+    }
+    case 'CYCLE_DETECTED':
+      console.error(`⚠ Cycle detected in supersedes chain.`);
+      if (error.claimId) console.error(`  Claim involved: ${error.claimId}`);
+      process.exitCode = 1;
+      return;
+    case 'BROKEN_CHAIN':
+      console.error(`⚠ Broken supersedes chain.`);
+      if (error.claimId) console.error(`  Missing claim: ${error.claimId}`);
+      process.exitCode = 1;
+      return;
+    default:
+      console.error(`⚠ ${error.message}`);
+      process.exitCode = 1;
+  }
+}
+
 function printBeliefExplanation(claims: Claim[], subject: string, predicate: string): void {
-  const belief = resolveCurrentBelief(claims, subject, predicate);
+  let belief;
+  try {
+    belief = resolveCurrentBelief(claims, subject, predicate);
+  } catch (e) {
+    printTrajectoryError(e as TrajectoryResolutionError);
+    return;
+  }
   if (!belief) {
     console.log(`No claims for ${subject}/${predicate}`);
     return;

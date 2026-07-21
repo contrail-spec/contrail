@@ -1,6 +1,6 @@
 {
-  "name": "@lukitadproxd-netizen/engram",
-  "version": "0.0.0",
+  "name": "@lucas-contrial/engram",
+  "version": "0.1.0",
   "description": "[EXPERIMENTAL] Contrail → Engram one-way adapter (convertFromEngram not implemented)",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,7 +30,7 @@
     "dist"
   ],
   "dependencies": {
-    "@lukitadproxd-netizen/core": "file:../../core"
+    "@lucas-contrial/core": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.0",

@@ -10,7 +10,7 @@
  * and round-trip tested.
  */
 
-import type { Claim, Trajectory } from '@lukitadproxd-netizen/core';
+import type { Claim, Trajectory } from '@lucas-contrial/core';
 
 export interface EngramEnvelope {
   IDENTITY?: Record<string, unknown>;

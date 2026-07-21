@@ -5,7 +5,7 @@ module.exports = {
     include: ['test/**/*.test.ts'],
     resolve: {
       alias: {
-        '@lukitadproxd-netizen/core': path.resolve(__dirname, '../../core/dist/index.js'),
+        '@lucas-contrial/core': path.resolve(__dirname, '../../core/dist/index.js'),
       }
     }
   }

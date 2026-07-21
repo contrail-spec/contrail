@@ -50,25 +50,39 @@ WITH CONTRAIL
 The demo is deterministic: fixed claim IDs, fixed timestamps, no LLM calls,
 no network access, no random values. The output is self-contained.
 
-For the full reproducible comparison across five scenarios:
+For the full reproducible comparison across six scenarios:
 
 ```bash
 npm run benchmark
 ```
 
-Current benchmark results (deterministic, always produces these numbers):
+The benchmark compares two memory strategies:
+
+- **Flat memory**: picks the highest-confidence claim for a given subject/predicate.
+  This is the best a system without temporal awareness can do — no supersession
+  tracking, no provenance.
+- **Contrail (temporal)**: follows the `supersedes` chain to find the current
+  instruction and its full history.
+
+Results (deterministic — same output every run, no LLM calls, no network):
 
 | Scenario | Flat memory | Contrail |
 |----------|-------------|----------|
-| Simple evolution | ✓ (lucky — highest confidence) | ✓ + provenance |
-| Three-step chain | ✗ (picks middle, not head) | ✓ |
-| Stale instruction trap | ✗ (picks stale, higher confidence) | ✓ |
+| Simple evolution | ✓ (correct by chance — highest confidence is current) | ✓ + provenance |
+| Three-step chain | ✗ (picks middle instruction, not head) | ✓ |
+| Stale instruction trap | ✗ (picks stale rule — it has higher confidence) | ✓ |
 | Multiple predicates | 1/2 correct | 2/2 + provenance |
-| Changing convention | ✓ (lucky — confidence climbs) | ✓ + provenance |
-| **Total** | **50% (3/6)** | **100% (6/6)** |
+| Changing convention | ✓ (correct by chance) | ✓ + provenance |
+| Confidence drops | ✗ (picks stale Lambda — confidence 0.95 > 0.55) | ✓ + provenance |
+| **Total** | **43% (3/7)** | **100% (7/7)** |
 
-The benchmark never calls an LLM, contacts a network, or uses random values.
-Every claim ID and timestamp is fixed. Every run produces the same output.
+Contrail provides full provenance (superseded value, chain length, source,
+timestamp) in every query. Flat memory provides none.
+
+> **Note:** the flat-memory strategy shown here is a simulation of a system
+> without temporal tracking. Real tools like Mem0, Zep, or Claude's native
+> memory may use different strategies. The benchmark measures the gap that
+> temporal awareness fills, not a comparison against any specific product.
 
 ## Quick install
 

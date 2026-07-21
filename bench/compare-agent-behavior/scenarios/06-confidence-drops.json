@@ -1,0 +1,47 @@
+{
+  "name": "Confidence Drops",
+  "description": "The team adopted a new deployment strategy but is less certain about it. Confidence decreased from 0.95 to 0.55, but the new instruction IS the current one. Flat memory picks the stale high-confidence instruction.",
+  "claims": [
+    {
+      "schema_version": "0.1.0",
+      "id": "BENCH-SC06-A00000000000001",
+      "subject": "repo",
+      "predicate": "project.deployment.strategy",
+      "value": "Deploy to AWS Lambda.",
+      "value_type": "string",
+      "confidence": 0.95,
+      "valid_from": "2026-01-15T10:00:00Z",
+      "valid_until": null,
+      "supersedes": null,
+      "source": { "tool": "devops-lead", "session_id": "infra-setup", "kind": "explicit-statement" },
+      "visibility": "shared",
+      "signature": null
+    },
+    {
+      "schema_version": "0.1.0",
+      "id": "BENCH-SC06-B00000000000002",
+      "subject": "repo",
+      "predicate": "project.deployment.strategy",
+      "value": "Deploy to Cloudflare Workers.",
+      "value_type": "string",
+      "confidence": 0.55,
+      "valid_from": "2026-06-01T14:00:00Z",
+      "valid_until": null,
+      "supersedes": "BENCH-SC06-A00000000000001",
+      "source": { "tool": "devops-lead", "session_id": "migration-review", "kind": "corrected" },
+      "visibility": "shared",
+      "signature": null
+    }
+  ],
+  "queries": [
+    {
+      "subject": "repo",
+      "predicate": "project.deployment.strategy",
+      "expected_value": "Deploy to Cloudflare Workers.",
+      "expected_chain_length": 2,
+      "expected_previous_value": "Deploy to AWS Lambda.",
+      "expected_explanation_includes": "supersedes",
+      "explanation": "Confidence measures certainty, not recency. The team adopted Cloudflare Workers but recorded lower confidence (0.55) because the migration is ongoing. Flat memory picks Lambda (0.95) because it has higher confidence. Contrail picks Workers because it is the head of the supersession chain."
+    }
+  ]
+}

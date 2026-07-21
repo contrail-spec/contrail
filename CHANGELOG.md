@@ -23,14 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Test Coverage (Phase 2.3)**: Added `@vitest/coverage-v8` to all packages
   - Core: 93.65% statements, 73.58% branches, 92.59% functions, 97.19% lines
   - Test:coverage scripts added to all package.json files
-- **Scope Migration (Phase 1.3)**: Renamed npm scope from `@contrailspec/*` to `@lukitadproxd-netizen/*`
+- **Scope Migration (Phase 1.3)**: Renamed npm scope from `@contrailspec/*` to `@lucas-contrial/*`
   - Updated all 4 package.json files, root package.json, schema $id, all markdown docs
 - **Build Order Fix (Phase 1.1)**: Root build script now compiles in dependency order: core → engram → cli → mcp
 - **Gitignore Fix (Phase 1.2)**: Removed `package-lock.json` from .gitignore (already tracked)
 - **README Updates (Phase 2.2)**: Architecture diagram updated to show Engram adapter as implemented (not stretch)
 
 ### Changed
-- **Package scope**: `@contrailspec/*` -> `@lukitadproxd-netizen/*` across all code and docs
+- **Package scope**: `@contrailspec/*` -> `@lucas-contrial/*` across all code and docs
 - **Schema $id**: `https://contrailspec.dev/schema/...` -> `https://lukitadproxd-netizen.github.io/contrail/schema/...`
 - **All markdown docs**: Updated GitHub URLs, npm install commands, import paths
 - **Core package**: vitest upgraded from 1.6.1 to 4.1.10 (matching @vitest/coverage-v8)
@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **MCP Server**: File lock added to appendClaim() to prevent concurrent write races
 - **Engram Adapter**: Fixed TS error on optional valid_from (now defaults to now)
-- **CLI Build**: Fixed @contrailspec/core -> @lukitadproxd-netizen/core imports
+- **CLI Build**: Fixed @contrailspec/core -> @lucas-contrial/core imports
 - **CLI Store**: generateULID() now produces valid 26-char Crockford Base32 ULIDs
 - **MCP Tests**: Added registerTool() to expose handlers for direct test invocation
 - **Engram Tests**: Fixed enum object literal syntax in test expectations

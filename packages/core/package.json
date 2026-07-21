@@ -1,6 +1,6 @@
 {
-  "name": "@lukitadproxd-netizen/core",
-  "version": "0.0.0",
+  "name": "@lucas-contrial/core",
+  "version": "0.1.0",
   "description": "Contrail core library — parse, validate, resolve trajectories, serialize",
   "type": "module",
   "main": "./dist/index.js",

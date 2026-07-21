@@ -1,6 +1,6 @@
 {
-  "name": "@lukitadproxd-netizen/mcp",
-  "version": "0.0.0",
+  "name": "@lucas-contrial/mcp",
+  "version": "0.1.0",
   "description": "Contrail MCP server for versioned project instructions",
   "type": "module",
   "main": "./dist/index.js",
@@ -33,7 +33,7 @@
     "dist"
   ],
   "dependencies": {
-    "@lukitadproxd-netizen/core": "file:../../core",
+    "@lucas-contrial/core": "^0.1.0",
     "@modelcontextprotocol/sdk": "^1.0.0",
     "proper-lockfile": "^4.1.2",
     "zod": "^3.23.0"

@@ -63,4 +63,5 @@ export interface TrajectoryResolutionError {
   code: 'NO_HEAD' | 'MULTIPLE_HEADS' | 'CYCLE_DETECTED' | 'BROKEN_CHAIN';
   message: string;
   claimId?: string;
+  heads?: Claim[];
 }

@@ -6,7 +6,7 @@ export default defineConfig({
     include: ['test/**/*.test.ts'],
     resolve: {
       alias: {
-        '@lukitadproxd-netizen/core': path.resolve(__dirname, '../../core/src/index.ts')
+        '@lucas-contrial/core': path.resolve(__dirname, '../../core/src/index.ts')
       }
     }
   }

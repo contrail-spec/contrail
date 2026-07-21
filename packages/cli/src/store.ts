@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, appendFileSync, existsSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
-import { lock, unlock, lockSync, unlockSync } from 'proper-lockfile';
-import type { Claim } from '@lukitadproxd-netizen/core';
+import { lockSync, unlockSync } from 'proper-lockfile';
+import type { Claim } from '@lucas-contrial/core';
 
 const STORE_DIR = '.contrail';
 const STORE_FILE = 'claims.jsonl';
@@ -32,15 +32,6 @@ function getLockPath(cwd: string): string {
 export function createStore(cwd: string): Store {
   const storePath = getStorePath(cwd);
   const lockPath = getLockPath(cwd);
-
-  async function withLock<T>(fn: () => Promise<T>): Promise<T> {
-    const release = await lock(lockPath, { retries: 5 });
-    try {
-      return await fn();
-    } finally {
-      await release();
-    }
-  }
 
   return {
     init() {
