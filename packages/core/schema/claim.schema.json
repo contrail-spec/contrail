@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://lukitadproxd-netizen.github.io/contrail/schema/v0.1/claim.schema.json",
+  "title": "Contrail Claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "subject",
+    "predicate",
+    "value",
+    "confidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "SemVer of the Contrail spec this claim conforms to"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9A-Za-z]{26}$",
+      "description": "ULID — 26-character Crockford base32, sortable by creation time"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Who/what this claim is about. Default 'self' for personal claims."
+    },
+    "predicate": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*){1,4}$",
+      "description": "Namespaced key: category.subcategory.key (1-4 segments, lowercase + underscore)"
+    },
+    "value": {
+      "description": "The claim's content. Shape depends on value_type."
+    },
+    "value_type": {
+      "type": "string",
+      "enum": ["string", "number", "boolean", "enum", "list"],
+      "default": "string",
+      "description": "Hint for consumers about the value's structure"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Certainty of the source at the moment of writing. No monotonicity required."
+    },
+    "valid_from": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp when this claim became current"
+    },
+    "valid_until": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp when this claim ceased to be current. null = still current."
+    },
+    "supersedes": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9A-Za-z]{26}$",
+      "description": "ULID of the claim this one replaces. Forms the Trajectory chain."
+    },
+    "source": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["tool", "session_id", "kind"],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Free-form tool/system identifier that wrote this claim"
+        },
+        "session_id": {
+          "type": ["string", "null"],
+          "description": "Opaque session identifier from the writing tool"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "explicit-statement",
+            "inferred",
+            "imported",
+            "corrected"
+          ],
+          "description": "How the claim was produced — closed enum for filterable provenance"
+        }
+      }
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["private", "shared"],
+      "default": "private",
+      "description": "Label only — not enforced by Contrail"
+    },
+    "signature": {
+      "type": ["string", "null"],
+      "default": null,
+      "description": "Reserved for Ed25519 signature in v0.2+. Unimplemented in v0.1 — do not rely on this field."
+    }
+  }
+}

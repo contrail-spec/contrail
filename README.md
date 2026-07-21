@@ -58,15 +58,15 @@ npm run benchmark
 
 The benchmark compares two memory strategies:
 
-- **Flat memory**: picks the highest-confidence claim for a given subject/predicate.
+- **Flat memory (confidence-only)**: picks the highest-confidence claim for a given subject/predicate.
   This is the best a system without temporal awareness can do — no supersession
   tracking, no provenance.
-- **Contrail (temporal)**: follows the `supersedes` chain to find the current
+- **Temporal memory (Contrail)**: follows the `supersedes` chain to find the current
   instruction and its full history.
 
 Results (deterministic — same output every run, no LLM calls, no network):
 
-| Scenario | Flat memory | Contrail |
+| Scenario | Flat memory (confidence-only) | Temporal memory (Contrail) |
 |----------|-------------|----------|
 | Simple evolution | ✓ (correct by chance — highest confidence is current) | ✓ + provenance |
 | Three-step chain | ✗ (picks middle instruction, not head) | ✓ |
@@ -77,12 +77,12 @@ Results (deterministic — same output every run, no LLM calls, no network):
 | **Total** | **43% (3/7)** | **100% (7/7)** |
 
 Contrail provides full provenance (superseded value, chain length, source,
-timestamp) in every query. Flat memory provides none.
+timestamp) in every query. Confidence-only provides none.
 
-> **Note:** the flat-memory strategy shown here is a simulation of a system
-> without temporal tracking. Real tools like Mem0, Zep, or Claude's native
-> memory may use different strategies. The benchmark measures the gap that
-> temporal awareness fills, not a comparison against any specific product.
+> **Note:** this compares against the best possible flat-memory strategy
+> (highest confidence wins), not against specific tools like Mem0 or Zep,
+> which use different retrieval strategies. The benchmark measures the gap
+> that temporal awareness fills, not a comparison against any specific product.
 
 ## Quick install
 

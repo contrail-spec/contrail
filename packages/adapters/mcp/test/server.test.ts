@@ -128,4 +128,70 @@ describe('ContrailMCPServer', () => {
     expect(result.isError).toBeFalsy();
     expect(result.content[0].text).toContain('No claim found');
   });
+
+  it('contrail_recall returns error on MULTIPLE_HEADS', async () => {
+    const rememberTool = server.getToolHandler('contrail_remember');
+    const recallTool = server.getToolHandler('contrail_recall');
+
+    // Add two claims for the same predicate without superseding — creates multiple heads
+    await rememberTool.handler({
+      subject: 'self',
+      predicate: 'preference.editor',
+      value: 'neovim',
+      confidence: 0.95,
+      source_tool: 'test',
+      source_kind: 'explicit-statement'
+    });
+
+    await rememberTool.handler({
+      subject: 'self',
+      predicate: 'preference.editor',
+      value: 'vim',
+      confidence: 0.85,
+      source_tool: 'test',
+      source_kind: 'explicit-statement'
+    });
+
+    const result = await recallTool.handler({
+      subject: 'self',
+      predicate: 'preference.editor'
+    });
+
+    expect(result.isError).toBe(true);
+    expect(result.content[0].text).toContain('Multiple heads');
+    expect(result.content[0].text).toContain('neovim');
+    expect(result.content[0].text).toContain('vim');
+  });
+
+  it('contrail_trajectory returns error on MULTIPLE_HEADS', async () => {
+    const rememberTool = server.getToolHandler('contrail_remember');
+    const trajectoryTool = server.getToolHandler('contrail_trajectory');
+
+    // Add two claims without superseding — creates multiple heads
+    await rememberTool.handler({
+      subject: 'self',
+      predicate: 'preference.editor',
+      value: 'emacs',
+      confidence: 0.9,
+      source_tool: 'test',
+      source_kind: 'explicit-statement'
+    });
+
+    await rememberTool.handler({
+      subject: 'self',
+      predicate: 'preference.editor',
+      value: 'helix',
+      confidence: 0.8,
+      source_tool: 'test',
+      source_kind: 'explicit-statement'
+    });
+
+    const result = await trajectoryTool.handler({
+      subject: 'self',
+      predicate: 'preference.editor'
+    });
+
+    expect(result.isError).toBe(true);
+    expect(result.content[0].text).toContain('Multiple heads');
+  });
 });

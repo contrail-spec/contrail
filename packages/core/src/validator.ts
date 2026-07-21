@@ -6,7 +6,7 @@ import type { Claim, ValidationResult, ValidationError } from './types.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const schemaPath = path.join(__dirname, '..', '..', '..', 'spec', 'schema', 'v0.1', 'claim.schema.json');
+const schemaPath = path.join(__dirname, '..', 'schema', 'claim.schema.json');
 const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf-8')) as JSONSchemaType<Claim>;
 
 const Ajv = AjvModule.default ?? AjvModule;

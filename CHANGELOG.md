@@ -8,9 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **Engram Adapter (Phase 2.1)**: Bidirectional conversion between Contrail Claims/Trajectories and Engram envelopes
+- **Engram Adapter (Phase 2.1)**: One-way conversion from Contrail Claims/Trajectories to Engram envelopes
   - `convertToEngram(claim, trajectory?)`: Maps identity/bid -> EngramEnvelope
-  - `convertFromEngram(envelope)`: EngramEnvelope -> Claim[]
+  - `convertFromEngram(envelope)`: **STUB — not implemented** (requires confirmed Engram schema)
   - Identity claims -> IDENTITY, Beliefs -> BELIEFS, Constraints -> CONSTRAINTS (confidence forced to 1.0)
   - Supersedes chain -> CORRECTIONS, Full trajectory -> EVOLUTION
   - 8 tests covering all conversion paths
@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Updated all 4 package.json files, root package.json, schema $id, all markdown docs
 - **Build Order Fix (Phase 1.1)**: Root build script now compiles in dependency order: core → engram → cli → mcp
 - **Gitignore Fix (Phase 1.2)**: Removed `package-lock.json` from .gitignore (already tracked)
-- **README Updates (Phase 2.2)**: Architecture diagram updated to show Engram adapter as implemented (not stretch)
+- **README Updates (Phase 2.2)**: Architecture diagram updated to show Engram adapter (one-way, experimental)
 
 ### Changed
 - **Package scope**: `@contrailspec/*` -> `@lucas-contrial/*` across all code and docs

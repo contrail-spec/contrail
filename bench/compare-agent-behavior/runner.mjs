@@ -5,13 +5,13 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
- * Standard agent simulation:
+ * Confidence-only lookup:
  * Flat memory without supersession awareness.
  * Picks the claim with the highest confidence for a given (subject, predicate).
  * This is the best possible flat strategy and still fails when
  * a stale instruction has higher confidence than the correction.
  */
-function standardLookup(claims, subject, predicate) {
+function flatMemoryLookup(claims, subject, predicate) {
   const matching = claims.filter(c => c.subject === subject && c.predicate === predicate);
   if (matching.length === 0) return null;
 
@@ -24,7 +24,7 @@ function standardLookup(claims, subject, predicate) {
  * Contrail agent simulation:
  * Uses the temporal supersession chain to find the current instruction.
  */
-function contrailLookup(claims, subject, predicate) {
+function temporalLookup(claims, subject, predicate) {
   const filtered = claims.filter(c => c.subject === subject && c.predicate === predicate);
   if (filtered.length === 0) return null;
 
@@ -60,39 +60,39 @@ function evaluateScenario(scenario) {
   const results = [];
 
   for (const query of scenario.queries) {
-    const standardResult = standardLookup(scenario.claims, query.subject, query.predicate);
-    const contrailResult = contrailLookup(scenario.claims, query.subject, query.predicate);
+    const flatResult = flatMemoryLookup(scenario.claims, query.subject, query.predicate);
+    const temporalResult = temporalLookup(scenario.claims, query.subject, query.predicate);
 
-    const standardValue = standardResult ? standardResult.value : null;
-    const contrailValue = contrailResult ? contrailResult.current.value : null;
+    const flatValue = flatResult ? flatResult.value : null;
+    const temporalValue = temporalResult ? temporalResult.current.value : null;
 
-    const standardCorrect = standardValue === query.expected_value;
-    const contrailCorrect = contrailValue === query.expected_value;
+    const flatCorrect = flatValue === query.expected_value;
+    const temporalCorrect = temporalValue === query.expected_value;
 
-    const standardHasProvenance = false; // flat memory never has provenance
-    const contrailHasProvenance = contrailResult !== null
-      && contrailResult.previous !== null
-      && contrailResult.chain.length === query.expected_chain_length;
+    const flatHasProvenance = false; // flat memory never has provenance
+    const temporalHasProvenance = temporalResult !== null
+      && temporalResult.previous !== null
+      && temporalResult.chain.length === query.expected_chain_length;
 
-    const contrailExplanation = contrailHasProvenance
-      ? `This claim supersedes ${contrailResult.previous.id}, so it is the current instruction.`
+    const temporalExplanation = temporalHasProvenance
+      ? `This claim supersedes ${temporalResult.previous.id}, so it is the current instruction.`
       : null;
 
     results.push({
       subject: query.subject,
       predicate: query.predicate,
       standard: {
-        value: standardValue,
-        correct: standardCorrect,
+        value: flatValue,
+        correct: flatCorrect,
         provenance: false
       },
       contrail: {
-        value: contrailValue,
-        correct: contrailCorrect,
-        provenance: contrailHasProvenance,
-        chainLength: contrailResult ? contrailResult.chain.length : 0,
-        previousValue: contrailResult ? contrailResult.previous?.value ?? null : null,
-        explanation: contrailExplanation
+        value: temporalValue,
+        correct: temporalCorrect,
+        provenance: temporalHasProvenance,
+        chainLength: temporalResult ? temporalResult.chain.length : 0,
+        previousValue: temporalResult ? temporalResult.previous?.value ?? null : null,
+        explanation: temporalExplanation
       },
       expected_value: query.expected_value,
       expected_chain_length: query.expected_chain_length
@@ -154,4 +154,4 @@ function runBenchmark(scenariosDir) {
   };
 }
 
-export { runBenchmark, standardLookup, contrailLookup, evaluateScenario, loadScenarios };
+export { runBenchmark, flatMemoryLookup, temporalLookup, evaluateScenario, loadScenarios };

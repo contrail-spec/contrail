@@ -1,6 +1,6 @@
 {
   "name": "@lucas-contrial/engram",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "[EXPERIMENTAL] Contrail → Engram one-way adapter (convertFromEngram not implemented)",
   "type": "module",
   "main": "./dist/index.js",

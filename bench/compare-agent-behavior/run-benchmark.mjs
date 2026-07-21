@@ -27,11 +27,11 @@ for (const scenario of result.scenarios) {
     console.log(`    Query: ${q.subject}/${q.predicate}`);
     console.log(`    Expected:   "${q.expected_value}"`);
     console.log(`    ─────────────────────────────────`);
-    console.log(`    WITHOUT CONTRAIL`);
+    console.log(`    WITHOUT CONTRAIL — Flat memory (confidence-only)`);
     console.log(`      ${sym} Value: "${q.standard.value}"`);
     console.log(`      ${q.standard.provenance ? '✓' : '✗'} Provenance: ${q.standard.provenance ? 'yes' : 'none (flat memory)'}`);
     console.log();
-    console.log(`    WITH CONTRAIL`);
+    console.log(`    WITH CONTRAIL — Temporal memory (supersession)`);
     const symC = q.contrail.correct ? '✓' : '✗';
     console.log(`      ${symC} Value: "${q.contrail.value}"`);
     console.log(`      ${q.contrail.provenance ? '✓' : '✗'} Provenance: ${q.contrail.provenance ? 'yes (full chain)' : 'no'}`);
@@ -54,11 +54,11 @@ console.log('===================================================================
 console.log();
 console.log(`  ${pad('', 30)} ${pad('Passed', 10)} ${pad('Total', 10)} ${pad('Score', 10)}`);
 console.log(`  ${pad('──────────────────────────────', 30)} ${pad('──────────', 10)} ${pad('──────────', 10)} ${pad('──────────', 10)}`);
-console.log(`  ${pad('Standard agent (flat memory)', 30)} ${pad(String(result.standardPassed), 10)} ${pad(String(result.totalQueries), 10)} ${pad(`${result.standardPct}%`, 10)}`);
-console.log(`  ${pad('Contrail agent (temporal)', 30)} ${pad(String(result.contrailPassed), 10)} ${pad(String(result.totalQueries), 10)} ${pad(`${result.contrailPct}%`, 10)}`);
-console.log();
-console.log(`  WITHOUT CONTRAIL: ${result.standardPassed}/${result.totalQueries} queries correct (${result.standardPct}%)`);
-console.log(`  WITH CONTRAIL:    ${result.contrailPassed}/${result.totalQueries} queries correct (${result.contrailPct}%)`);
+  console.log(`  ${pad('Flat memory (confidence-only)', 30)} ${pad(String(result.standardPassed), 10)} ${pad(String(result.totalQueries), 10)} ${pad(`${result.standardPct}%`, 10)}`);
+  console.log(`  ${pad('Temporal memory (supersession)', 30)} ${pad(String(result.contrailPassed), 10)} ${pad(String(result.totalQueries), 10)} ${pad(`${result.contrailPct}%`, 10)}`);
+  console.log();
+  console.log(`  Flat memory (confidence-only): ${result.standardPassed}/${result.totalQueries} queries correct (${result.standardPct}%)`);
+  console.log(`  Temporal memory (Contrail):    ${result.contrailPassed}/${result.totalQueries} queries correct (${result.contrailPct}%)`);
 console.log();
 
 if (result.contrailPassed > result.standardPassed) {

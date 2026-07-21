@@ -1,6 +1,6 @@
 {
   "name": "@lucas-contrial/core",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Contrail core library — parse, validate, resolve trajectories, serialize",
   "type": "module",
   "main": "./dist/index.js",
@@ -28,7 +28,8 @@
   ],
   "license": "Apache-2.0",
   "files": [
-    "dist"
+    "dist",
+    "schema"
   ],
   "devDependencies": {
     "@types/node": "^20.12.0",

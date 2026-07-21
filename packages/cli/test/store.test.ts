@@ -121,4 +121,53 @@ describe('Store', () => {
     }
     expect(ids.size).toBe(100);
   });
+
+  it('resolveCurrentBelief throws MULTIPLE_HEADS with head details', () => {
+    const id1 = generateULID();
+    const id2 = generateULID();
+    const claims: Claim[] = [
+      {
+        schema_version: '0.1.0',
+        id: id1,
+        subject: 'self',
+        predicate: 'preference.editor',
+        value: 'neovim',
+        value_type: 'string',
+        confidence: 0.95,
+        valid_from: '2025-01-01T00:00:00Z',
+        valid_until: null,
+        supersedes: null,
+        source: { tool: 'test', session_id: null, kind: 'explicit-statement' },
+        visibility: 'private',
+        signature: null
+      } as Claim,
+      {
+        schema_version: '0.1.0',
+        id: id2,
+        subject: 'self',
+        predicate: 'preference.editor',
+        value: 'vim',
+        value_type: 'string',
+        confidence: 0.85,
+        valid_from: '2025-01-01T00:00:00Z',
+        valid_until: null,
+        supersedes: null,
+        source: { tool: 'test', session_id: null, kind: 'explicit-statement' },
+        visibility: 'private',
+        signature: null
+      } as Claim
+    ];
+
+    try {
+      resolveCurrentBelief(claims, 'self', 'preference.editor');
+      expect.fail('Should have thrown MULTIPLE_HEADS');
+    } catch (e) {
+      const err = e as TrajectoryResolutionError;
+      expect(err.code).toBe('MULTIPLE_HEADS');
+      expect(err.heads).toBeDefined();
+      expect(err.heads!.length).toBe(2);
+      expect(err.heads![0].value).toBe('neovim');
+      expect(err.heads![1].value).toBe('vim');
+    }
+  });
 });

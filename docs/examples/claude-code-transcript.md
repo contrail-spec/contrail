@@ -1,7 +1,8 @@
-# Claude Code + Contrail MCP — Real Transcript
+# Claude Code + Contrail MCP — Illustrated Transcript
 
-This is a realistic transcript of Claude Code using the Contrail MCP server
-to recall and follow project instructions.
+This transcript shows the expected interaction shape between Claude Code
+and the Contrail MCP server. For a verified, automatically-tested real
+session, see `packages/adapters/mcp/test/stdio-integration.test.ts`.
 
 ---
 
@@ -10,9 +11,9 @@ to recall and follow project instructions.
 ```bash
 # In your project root, init Contrail and add some claims
 npx @lucas-contrial/cli init
-npx @lucas-contrial/cli add self preference.editor --value "neovim" --confidence 0.95 --source-tool claude-code --source-kind explicit-statement
-npx @lucas-contrial/cli add repo project.testing.framework --value "Use Node's built-in test runner." --confidence 0.90 --source-tool project-maintainer --source-kind explicit-statement
-npx @lucas-contrial/cli add repo project.testing.framework --value "Use Vitest." --confidence 0.98 --source-tool project-maintainer --source-kind corrected --supersedes $(npx @lucas-contrial/cli log repo project.testing.framework 2>/dev/null | head -1 | jq -r '.id')
+npx @lucas-contrial/cli add self/preference.editor "neovim" --confidence 0.95 --source-tool claude-code --source-kind explicit-statement
+npx @lucas-contrial/cli add repo/project.testing.framework "Use Node's built-in test runner." --confidence 0.90 --source-tool project-maintainer --source-kind explicit-statement
+npx @lucas-contrial/cli add repo/project.testing.framework "Use Vitest." --confidence 0.98 --source-tool project-maintainer --source-kind corrected --supersedes BENCH-SC01-A00000000000001
 
 # Connect the MCP server to Claude Code
 claude mcp add contrail -- npx @lucas-contrial/mcp
@@ -125,7 +126,7 @@ And update your `package.json` scripts:
 
 **Claude Code:**
 
-The project uses **Vest** — this was corrected from the original Node test
+The project uses **Vitest** — this was corrected from the original Node test
 runner decision on June 15, 2026 by the project maintainer (confidence: 0.98).
 
 Source: Contrail MCP → `contrail_recall(repo/project.testing.framework)`
@@ -203,5 +204,7 @@ The original decision was corrected when the team standardized on Vitest.
 
 ---
 
-*Generated from a real Contrail MCP session. All claim IDs and timestamps
-are deterministic — this transcript can be reproduced exactly.*
+*Illustrative transcript showing the expected interaction shape and MCP response
+format. Claim IDs are simplified for readability (real IDs are ULIDs like
+`01KY1BEATTAG0MJAST1GSP143Y`). For a verified, automatically-tested real
+session, see `packages/adapters/mcp/test/stdio-integration.test.ts`.*
