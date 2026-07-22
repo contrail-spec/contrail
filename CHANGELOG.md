@@ -23,15 +23,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Test Coverage (Phase 2.3)**: Added `@vitest/coverage-v8` to all packages
   - Core: 93.65% statements, 73.58% branches, 92.59% functions, 97.19% lines
   - Test:coverage scripts added to all package.json files
-- **Scope Migration (Phase 1.3)**: Renamed npm scope from `@contrailspec/*` to `@lucas-contrial/*`
+- **Scope Migration (Phase 1.3)**: Renamed npm scope from `@contrailspec/*` to `@contrail-spec/*`
   - Updated all 4 package.json files, root package.json, schema $id, all markdown docs
 - **Build Order Fix (Phase 1.1)**: Root build script now compiles in dependency order: core → engram → cli → mcp
 - **Gitignore Fix (Phase 1.2)**: Removed `package-lock.json` from .gitignore (already tracked)
 - **README Updates (Phase 2.2)**: Architecture diagram updated to show Engram adapter (one-way, experimental)
 
 ### Changed
-- **Package scope**: `@contrailspec/*` -> `@lucas-contrial/*` across all code and docs
-- **Schema $id**: `https://contrailspec.dev/schema/...` -> `https://lukitadproxd-netizen.github.io/contrail/schema/...`
+- **Package scope**: `@contrailspec/*` -> `@contrail-spec/*` across all code and docs
+- **Schema $id**: `https://contrailspec.dev/schema/...` -> `https://contrail-spec.github.io/contrail/schema/...`
 - **All markdown docs**: Updated GitHub URLs, npm install commands, import paths
 - **Core package**: vitest upgraded from 1.6.1 to 4.1.10 (matching @vitest/coverage-v8)
 - **All packages**: vitest and @vitest/coverage-v8 aligned to 4.1.10
@@ -39,10 +39,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **MCP Server**: File lock added to appendClaim() to prevent concurrent write races
 - **Engram Adapter**: Fixed TS error on optional valid_from (now defaults to now)
-- **CLI Build**: Fixed @contrailspec/core -> @lucas-contrial/core imports
+- **CLI Build**: Fixed @contrailspec/core -> @contrail-spec/core imports
 - **CLI Store**: generateULID() now produces valid 26-char Crockford Base32 ULIDs
 - **MCP Tests**: Added registerTool() to expose handlers for direct test invocation
 - **Engram Tests**: Fixed enum object literal syntax in test expectations
+
+## [0.2.0] - 2026-07-22
+
+### Added
+- **Organization migration**: Renamed npm/GitHub org from `@lucas-contrial` / `lukitadproxd-netizen` to `@contrail-spec` / `contrail-spec`
+  - Updated all package names, imports, schema $id, URLs, docs
+  - Published 4 packages under `@contrail-spec`
+  - Deprecated all `@lucas-contrial` packages
+
+## [0.1.4] - 2026-07-22
+
+### Fixed
+- **Core validation**: Added try/catch around `validate()` call to handle edge cases where AJV throws instead of returning false (e.g., malformed input types). Error details now always include field and message, never an empty `"Validation failed: "` message.
+
+## [0.1.3] - 2026-07-22
+
+### Fixed
+- **Core dependencies**: Added missing `ajv` to `dependencies` (was only in `devDependencies`). Monorepo hoisting hid this bug; caught by `scripts/verify-publish.mjs`.
+
+## [0.1.2] - 2026-07-22
+
+### Fixed
+- **CLI shebang**: Added `#!/usr/bin/env node` to `packages/cli/src/cli.ts` so `npx @contrail-spec/cli` and `.bin/contrail` work correctly.
 
 ## [0.0.0] - 2026-07-16
 

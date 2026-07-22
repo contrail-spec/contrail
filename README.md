@@ -89,7 +89,7 @@ timestamp) in every query. Confidence-only provides none.
 Requires Node.js 20 or later.
 
 ```bash
-git clone https://github.com/lukitadproxd-netizen/contrail.git
+git clone https://github.com/contrail-spec/contrail.git
 cd contrail
 npm install
 npm run demo

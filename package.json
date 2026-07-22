@@ -5,13 +5,13 @@
   "description": "Versioned project memory for coding agents",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lukitadproxd-netizen/contrail.git"
+    "url": "git+https://github.com/contrail-spec/contrail.git"
   },
   "license": "Apache-2.0",
   "author": "Contrail Contributors",
-  "homepage": "https://lukitadproxd-netizen.github.io/contrail",
+  "homepage": "https://contrail-spec.github.io/contrail",
   "bugs": {
-    "url": "https://github.com/lukitadproxd-netizen/contrail/issues"
+    "url": "https://github.com/contrail-spec/contrail/issues"
   },
   "keywords": [
     "ai-memory",
@@ -27,15 +27,15 @@
   ],
   "scripts": {
     "build": "npm run build:core && npm run build:engram && npm run build:cli && npm run build:mcp",
-    "build:core": "npm run build --workspace=@lucas-contrial/core --if-present",
-    "build:engram": "npm run build --workspace=@lucas-contrial/engram --if-present",
-    "build:cli": "npm run build --workspace=@lucas-contrial/cli --if-present",
-    "build:mcp": "npm run build --workspace=@lucas-contrial/mcp --if-present",
+    "build:core": "npm run build --workspace=@contrail-spec/core --if-present",
+    "build:engram": "npm run build --workspace=@contrail-spec/engram --if-present",
+    "build:cli": "npm run build --workspace=@contrail-spec/cli --if-present",
+    "build:mcp": "npm run build --workspace=@contrail-spec/mcp --if-present",
     "test": "npm run test --workspaces --if-present",
-    "test:core": "npm run test --workspace=@lucas-contrial/core --if-present",
-    "test:cli": "npm run test --workspace=@lucas-contrial/cli --if-present",
-    "test:mcp": "npm run test --workspace=@lucas-contrial/mcp --if-present",
-    "test:engram": "npm run test --workspace=@lucas-contrial/engram --if-present",
+    "test:core": "npm run test --workspace=@contrail-spec/core --if-present",
+    "test:cli": "npm run test --workspace=@contrail-spec/cli --if-present",
+    "test:mcp": "npm run test --workspace=@contrail-spec/mcp --if-present",
+    "test:engram": "npm run test --workspace=@contrail-spec/engram --if-present",
     "test:coverage": "npm run test:coverage --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",

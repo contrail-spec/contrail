@@ -10,7 +10,7 @@
  * and round-trip tested.
  */
 
-import type { Claim, Trajectory } from '@lucas-contrial/core';
+import type { Claim, Trajectory } from '@contrail-spec/core';
 
 export interface EngramEnvelope {
   IDENTITY?: Record<string, unknown>;
@@ -93,7 +93,7 @@ export function convertToEngram(
  * explicit stub: it could silently produce claims that look valid but
  * don't actually round-trip correctly with real Engram data.
  *
- * Tracked in: https://github.com/lukitadproxd-netizen/contrail/issues/6
+ * Tracked in: https://github.com/contrail-spec/contrail/issues/6
  */
 export function convertFromEngram(_envelope: EngramEnvelope): Claim[] {
   void _envelope;

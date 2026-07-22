@@ -1,6 +1,9 @@
 {
-  "name": "@lucas-contrial/engram",
-  "version": "0.1.1",
+  "name": "@contrail-spec/engram",
+  "version": "0.1.2",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "[EXPERIMENTAL] Contrail → Engram one-way adapter (convertFromEngram not implemented)",
   "type": "module",
   "main": "./dist/index.js",
@@ -30,7 +33,7 @@
     "dist"
   ],
   "dependencies": {
-    "@lucas-contrial/core": "^0.1.0"
+    "@contrail-spec/core": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.0",

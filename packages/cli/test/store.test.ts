@@ -3,8 +3,8 @@ import { mkdtempSync, rmSync, writeFileSync, readFileSync, mkdirSync } from 'fs'
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { createStore, generateULID } from '../src/store.js';
-import { resolveCurrentBelief } from '@lucas-contrial/core';
-import type { Claim, TrajectoryResolutionError } from '@lucas-contrial/core';
+import { resolveCurrentBelief } from '@contrail-spec/core';
+import type { Claim, TrajectoryResolutionError } from '@contrail-spec/core';
 
 describe('Store', () => {
   let testDir: string;

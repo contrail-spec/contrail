@@ -1,6 +1,9 @@
 {
-  "name": "@lucas-contrial/core",
-  "version": "0.1.3",
+  "name": "@contrail-spec/core",
+  "version": "0.1.5",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Contrail core library — parse, validate, resolve trajectories, serialize",
   "type": "module",
   "main": "./dist/index.js",

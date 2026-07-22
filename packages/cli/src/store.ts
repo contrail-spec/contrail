@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, appendFileSync, existsSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
 import { lockSync, unlockSync } from 'proper-lockfile';
-import type { Claim } from '@lucas-contrial/core';
+import type { Claim } from '@contrail-spec/core';
 
 const STORE_DIR = '.contrail';
 const STORE_FILE = 'claims.jsonl';

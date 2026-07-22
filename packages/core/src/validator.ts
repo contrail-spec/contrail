@@ -38,7 +38,15 @@ function getValidator(): (data: unknown) => data is Claim {
 export async function validateClaim(claim: unknown): Promise<ValidationResult> {
   const validate = getValidator();
   const ajv = getAjv();
-  const valid = validate(claim);
+  let valid: boolean;
+  try {
+    valid = validate(claim);
+  } catch (e) {
+    return {
+      valid: false,
+      errors: [{ field: '', message: `Validation error: ${e instanceof Error ? e.message : String(e)}` }]
+    };
+  }
   
   if (valid) {
     return { valid: true, errors: [] };
@@ -46,8 +54,12 @@ export async function validateClaim(claim: unknown): Promise<ValidationResult> {
 
   const errors: ValidationError[] = (ajv.errors ?? []).map((err: ErrorObject) => ({
     field: err.instancePath || err.schemaPath,
-    message: err.message ?? 'Validation failed'
+    message: err.message ?? 'unknown validation error'
   }));
+
+  if (errors.length === 0) {
+    return { valid: false, errors: [{ field: '', message: 'unknown validation error' }] };
+  }
 
   return { valid: false, errors };
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://lukitadproxd-netizen.github.io/contrail/schema/v0.1/claim.schema.json",
+  "$id": "https://contrail-spec.github.io/contrail/schema/v0.1/claim.schema.json",
   "title": "Contrail Claim",
   "type": "object",
   "additionalProperties": false,

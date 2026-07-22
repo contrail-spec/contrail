@@ -10,15 +10,15 @@ session, see `packages/adapters/mcp/test/stdio-integration.test.ts`.
 
 ```bash
 # In your project root, init Contrail and seed a few claims
-npx @lucas-contrial/cli init
-npx @lucas-contrial/cli add preference.editor "neovim" --confidence 0.95 --source-tool claude-code --source-kind explicit-statement
-npx @lucas-contrial/cli add project.testing.framework "Use Node's built-in test runner." --confidence 0.90 --source-tool project-maintainer --source-kind explicit-statement --subject repo
+npx @contrail-spec/cli init
+npx @contrail-spec/cli add preference.editor "neovim" --confidence 0.95 --source-tool claude-code --source-kind explicit-statement
+npx @contrail-spec/cli add project.testing.framework "Use Node's built-in test runner." --confidence 0.90 --source-tool project-maintainer --source-kind explicit-statement --subject repo
 # Supersede the earlier testing framework claim with the current decision
-npx @lucas-contrial/cli add project.testing.framework "Use Vitest." --confidence 0.98 --source-tool project-maintainer --source-kind corrected --subject repo
+npx @contrail-spec/cli add project.testing.framework "Use Vitest." --confidence 0.98 --source-tool project-maintainer --source-kind corrected --subject repo
 # Note: in practice, add --supersedes <ULID> to link to the previous claim
 
 # Connect the MCP server to Claude Code
-claude mcp add contrail -- npx @lucas-contrial/mcp
+claude mcp add contrail -- npx @contrail-spec/mcp
 ```
 
 ---

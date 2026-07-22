@@ -33,7 +33,7 @@ contrail log preference.editor
 
 ## Demo Script for Claude Code
 
-After connecting via MCP (`claude mcp add contrail -- npx @lucas-contrial/mcp`):
+After connecting via MCP (`claude mcp add contrail -- npx @contrail-spec/mcp`):
 
 1. "What's my editor?" → recalls neovim with trajectory
 2. "Show me my code style history" → shows functional → pragmatic shift

@@ -6,7 +6,7 @@ export default defineConfig({
     include: ['test/**/*.test.ts'],
     resolve: {
       alias: {
-        '@lucas-contrial/core': path.resolve(__dirname, '../../core/src/index.ts')
+        '@contrail-spec/core': path.resolve(__dirname, '../../core/src/index.ts')
       }
     }
   }

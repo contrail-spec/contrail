@@ -1,7 +1,8 @@
+#!/usr/bin/env node
 import { Command } from 'commander';
 import { createStore, generateULID, type Store } from './index.js';
-import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@lucas-contrial/core';
-import type { Claim, TrajectoryResolutionError } from '@lucas-contrial/core';
+import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@contrail-spec/core';
+import type { Claim, TrajectoryResolutionError } from '@contrail-spec/core';
 
 const program = new Command();
 

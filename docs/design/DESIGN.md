@@ -278,7 +278,7 @@ Seven phases, 33 days (16 Jul → 17 Aug inclusive). Every task below is sized t
 
 | Task | Output | Est. |
 |---|---|---|
-| Verify `contrail` availability on npm, GitHub org, and as a `.dev`/`.build` domain; if taken, fall back to `lukitadproxd-netizen` | Decision recorded in `GOVERNANCE.md` | 30 min |
+| Verify `contrail` availability on npm, GitHub org, and as a `.dev`/`.build` domain; if taken, fall back to `contrail-spec` | Decision recorded in `GOVERNANCE.md` | 30 min |
 | Register GitHub org / repo, npm org (scoped `@contrail` if root name taken) | Live, empty repo | 20 min |
 | Write one paragraph "why this and not Engram/OMP" — this becomes `docs/faq.md` §1 later, but write it now as a gut check | Paragraph in a scratch file | 45 min |
 | Choose license (Apache-2.0) and add `LICENSE` | File committed | 10 min |
