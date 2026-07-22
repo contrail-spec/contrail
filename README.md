@@ -149,6 +149,12 @@ Contrail is intentionally **offline-first, dependency-minimal, and
 deterministic**. It doesn't call any LLM, doesn't need API keys,
 and doesn't generate ongoing costs.
 
+> **Known limitation:** MULTIPLE_HEADS conflicts are detected but
+> cannot be structurally resolved within the current `supersedes`
+> model (single ID, linear chain). See
+> [FAQ → conflict resolution](docs/faq.md#what-happens-if-two-instructions-conflict)
+> for details and workarounds.
+
 ## How it fits
 
 ```text
