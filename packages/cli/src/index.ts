@@ -1,1 +1,1 @@
-export { createStore, generateULID, type Store } from './store.js';
+export { createStore, generateULID, type Store } from '@contrail-spec/core';

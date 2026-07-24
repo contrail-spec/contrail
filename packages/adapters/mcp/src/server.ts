@@ -1,9 +1,9 @@
 ﻿import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { readFileSync, appendFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
-import { lock, unlock } from 'proper-lockfile';
+import { lock } from 'proper-lockfile';
 import { z } from 'zod';
-import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@contrail-spec/core';
+import { parseClaim, resolveCurrentBelief, resolveTrajectory, generateULID } from '@contrail-spec/core';
 import type { Claim, TrajectoryResolutionError } from '@contrail-spec/core';
 
 const STORE_DIR = '.contrail';
@@ -79,32 +79,10 @@ async function appendClaim(storePath: string, claim: Claim): Promise<void> {
   
   const release = await lock(lockPath, { retries: 5 });
   try {
-    const dir = resolve(storePath, '..');
-    if (!existsSync(dir)) {
-      mkdirSync(dir, { recursive: true });
-    }
     appendFileSync(storePath, line + '\n', 'utf-8');
   } finally {
     await release();
   }
-}
-
-function generateULID(): string {
-  const alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
-  
-  let timestamp = Date.now();
-  let timestampStr = '';
-  for (let i = 0; i < 10; i++) {
-    timestampStr = alphabet[timestamp % 32] + timestampStr;
-    timestamp = Math.floor(timestamp / 32);
-  }
-  
-  let randomStr = '';
-  for (let i = 0; i < 16; i++) {
-    randomStr += alphabet[Math.floor(Math.random() * 32)];
-  }
-  
-  return timestampStr + randomStr;
 }
 
 function formatTrajectoryMCPError(error: TrajectoryResolutionError): string {

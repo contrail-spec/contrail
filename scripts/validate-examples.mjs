@@ -4,9 +4,13 @@
  * Exits non-zero if any valid fixture fails or any invalid fixture passes.
  */
 
-const fs = require('fs');
-const path = require('path');
-const Ajv = require('ajv');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import Ajv from 'ajv';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const SCHEMA_PATH = path.join(__dirname, '..', 'spec', 'schema', 'v0.1', 'claim.schema.json');
 const VALID_DIR = path.join(__dirname, '..', 'spec', 'schema', 'v0.1', 'examples', 'valid');
@@ -37,10 +41,10 @@ function main() {
     const valid = validate(data);
 
     if (valid) {
-      console.log(`  ✓ ${file}`);
+      console.log(`  \u2713 ${file}`);
       passed++;
     } else {
-      console.error(`  ✗ ${file} — expected valid, got errors:`);
+      console.error(`  \u2717 ${file} \u2014 expected valid, got errors:`);
       console.error(JSON.stringify(validate.errors, null, 2));
       failed++;
     }
@@ -56,10 +60,10 @@ function main() {
     const valid = validate(data);
 
     if (!valid) {
-      console.log(`  ✓ ${file} (correctly rejected)`);
+      console.log(`  \u2713 ${file} (correctly rejected)`);
       passed++;
     } else {
-      console.error(`  ✗ ${file} — expected invalid, but passed validation`);
+      console.error(`  \u2717 ${file} \u2014 expected invalid, but passed validation`);
       failed++;
     }
   }

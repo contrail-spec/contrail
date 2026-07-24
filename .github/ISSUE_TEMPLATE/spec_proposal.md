@@ -1,46 +1,42 @@
 ---
 name: Spec Proposal
-about: Propose a change to the Contrail schema or semantics
-title: "[SPEC] "
-labels: ["spec-question"]
-assignees: ""
+about: Propose a change to the Contrail specification or schema
+title: '[spec] '
+labels: 'spec-question'
 ---
 
 ## Summary
 
-One-sentence summary of the proposed change.
+One sentence describing the proposed spec change.
 
-## Motivation
+## Current behavior
 
-Why is this change needed? What problem does it solve?
+What the spec says today (include section reference, e.g. "SPEC.md §2.1").
 
-## Detailed Design
+## Proposed change
 
-Describe the change in detail:
-- New/changed fields
-- Schema modifications
-- Semantic changes
-- Migration implications
+Be specific: which fields, what types, what validation rules.
 
-## Backwards Compatibility
+## Rationale
 
-- [ ] Additive only (MINOR bump)
-- [ ] Breaking change (MAJOR bump required)
-- [ ] Requires migration script
+Why this change? What use case does it enable that the current spec handles poorly?
 
-## Engram/OMP/MCP Impact
+## Backward compatibility
 
-Does this affect compatibility with other protocols?
+- [ ] This is additive-only (new optional field) — MINOR bump
+- [ ] This changes existing field semantics — MAJOR bump + migration note
+- [ ] This removes a field — MAJOR bump + migration note
 
-## Alternatives Considered
+## Affected areas
 
-What else was considered and why was it rejected?
+- [ ] `spec/SPEC.md`
+- [ ] `spec/schema/v0.1/claim.schema.json`
+- [ ] `spec/schema/v0.1/examples/valid/` (new fixtures)
+- [ ] `spec/schema/v0.1/examples/invalid/` (if new validation rules)
+- [ ] `spec/CHANGELOG.md`
+- [ ] `packages/core/src/validator.ts`
+- [ ] `packages/core/src/types.ts`
 
-## Checklist
+## Discussion
 
-- [ ] I have read the Anti-Patterns section of SPEC.md
-- [ ] This does not introduce a controlled vocabulary for `predicate`
-- [ ] This does not add embedding/vector fields
-- [ ] This does not implement signing
-- [ ] This does not add access control enforcement
-- [ ] This does not blur the line with agent capability manifests (A2A/MCP)
+> Per CONTRIBUTING.md, spec changes must be discussed in this issue before a PR is opened. Do not skip this step.

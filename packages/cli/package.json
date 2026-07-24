@@ -7,7 +7,7 @@
   "description": "Contrail CLI — init, add, log, validate, diff",
   "type": "module",
   "bin": {
-    "contrail": "./dist/cli.js"
+    "contrail": "dist/cli.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -37,8 +37,7 @@
   ],
   "dependencies": {
     "@contrail-spec/core": "^0.1.0",
-    "commander": "^12.0.0",
-    "proper-lockfile": "^4.1.2"
+    "commander": "^12.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.0",

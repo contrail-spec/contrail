@@ -1,40 +1,42 @@
-name: CI
+name: Release
 
 on:
-  pull_request:
-    branches: [main]
   push:
-    branches: [main]
+    tags:
+      - 'v*'
 
 permissions:
-  contents: read
+  contents: write
+  id-token: write
 
 jobs:
-  ci:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build all packages
         run: npm run build
 
-      - name: Typecheck
-        run: npm run typecheck --workspaces --if-present
-
-      - name: Lint
-        run: npm run lint --workspaces --if-present
-
-      - name: Test
+      - name: Run tests
         run: npm run test --workspaces --if-present
 
-      - name: Spec validation
+      - name: Validate spec fixtures
         run: node scripts/validate-examples.mjs
+
+      - name: Publish to npm
+        run: npm publish --workspaces --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

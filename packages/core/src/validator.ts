@@ -18,7 +18,7 @@ function getAjv(): InstanceType<typeof Ajv> {
   if (!ajvInstance) {
     ajvInstance = new Ajv({ strict: true, allErrors: true, verbose: true });
     ajvInstance.addFormat('date-time', {
-      validate: (str: string) => {
+      validate: (str: unknown) => {
         if (typeof str !== 'string') return false;
         const date = new Date(str);
         return !isNaN(date.getTime()) && str.endsWith('Z') && str.includes('T');

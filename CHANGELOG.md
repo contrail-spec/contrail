@@ -8,6 +8,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **CI/CD workflows**: GitHub Actions for CI, spec validation, and npm release
+  - `.github/workflows/ci.yml` — lint, typecheck, build, test, spec validation on every PR
+  - `.github/workflows/spec-validate.yml` — fixture validation on spec/schema changes
+  - `.github/workflows/release.yml` — npm publish on tag push
+- **Issue templates**: bug report, feature request, spec proposal (`.github/ISSUE_TEMPLATE/`)
+- **PR template**: `.github/PULL_REQUEST_TEMPLATE.md` with DCO checklist
+- **Core store module**: `@contrail-spec/core` now exports `createStore()` and `generateULID()`
+  - `packages/core/src/store.ts` — canonical sync Store implementation
+  - `packages/core/src/ulid.ts` — canonical ULID generator
+  - CLI and MCP server now import these from core, eliminating duplication
+- **Spec validation script**: `scripts/validate-examples.mjs` (ESM, replaces `.js` version)
+
+### Changed
+- **CLI imports consolidated**: `cli.ts` now imports all types and functions from `@contrail-spec/core` in a single statement
+- **CLI `add` command**: Refactored nested ternary into explicit `parseValue()` function with `switch` for readability
+- **MCP server `appendClaim`**: Removed redundant directory creation inside lock (already created by `ensureLockDir`)
+- **`@contrail-spec/core` dependencies**: Added `proper-lockfile` (store module lives here now)
+- **`@contrail-spec/cli` dependencies**: Removed `proper-lockfile` (inherited from core)
+- **Root `package.json`**: Removed `proper-lockfile` from root dependencies (lives in core)
+
+### Fixed
+- **CLI store**: Removed unused import `unlockSync` from `proper-lockfile` (ESLint warning)
+- **MCP server**: Removed unused import `unlock` from `proper-lockfile` (ESLint warning)
+- **Core validator**: `date-time` format validator parameter type changed from `string` to `unknown` — the type guard `typeof str !== 'string'` is now semantically correct
+- **MCP server**: `generateULID()` duplication removed — imported from `@contrail-spec/core` instead
+- **CLI store**: `generateULID()` duplication removed — imported from `@contrail-spec/core` instead
+
+### Previous entries
+
+### Added (prior unreleased)
 - **Engram Adapter (Phase 2.1)**: One-way conversion from Contrail Claims/Trajectories to Engram envelopes
   - `convertToEngram(claim, trajectory?)`: Maps identity/bid -> EngramEnvelope
   - `convertFromEngram(envelope)`: **STUB — not implemented** (requires confirmed Engram schema)

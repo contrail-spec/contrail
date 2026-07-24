@@ -1,16 +1,21 @@
-name: CI
+name: Spec Validate
 
 on:
   pull_request:
-    branches: [main]
+    paths:
+      - 'spec/**'
+      - 'packages/core/schema/**'
   push:
     branches: [main]
+    paths:
+      - 'spec/**'
+      - 'packages/core/schema/**'
 
 permissions:
   contents: read
 
 jobs:
-  ci:
+  validate-spec:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,17 +29,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
-
-      - name: Typecheck
-        run: npm run typecheck --workspaces --if-present
-
-      - name: Lint
-        run: npm run lint --workspaces --if-present
-
-      - name: Test
-        run: npm run test --workspaces --if-present
-
-      - name: Spec validation
+      - name: Validate spec fixtures
         run: node scripts/validate-examples.mjs

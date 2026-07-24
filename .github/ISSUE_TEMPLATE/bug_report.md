@@ -1,36 +1,30 @@
 ---
 name: Bug Report
-about: Report a bug in Contrail
-title: "[BUG] "
-labels: ["bug"]
-assignees: ""
+about: Something is broken or incorrect
+title: '[bug] '
+labels: 'bug'
 ---
 
 ## Description
 
-A clear and concise description of what the bug is.
+A clear description of what's wrong.
 
-## Steps to Reproduce
+## Reproduction
 
-1. Go to '...'
-2. Run command '...'
-3. See error
+```bash
+# Steps to reproduce
+```
 
-## Expected Behavior
+## Expected
 
 What you expected to happen.
 
-## Actual Behavior
+## Actual
 
-What actually happened (error message, stack trace, etc.).
+What actually happened.
 
 ## Environment
 
-- OS: [e.g., macOS 14.5, Ubuntu 24.04, Windows 11]
-- Node.js version: [run `node --version`]
-- npm version: [run `npm --version`]
-- Contrail version: [run `contrail --version` or check package.json]
-
-## Additional Context
-
-Any other context, logs, or screenshots.
+- OS:
+- Node version:
+- Contrail package(s) and version(s):

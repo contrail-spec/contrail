@@ -1,29 +1,28 @@
 ---
 name: Feature Request
-about: Suggest an idea for Contrail
-title: "[FEATURE] "
-labels: ["feature"]
-assignees: ""
+about: Suggest a new capability or improvement
+title: '[feat] '
+labels: 'enhancement'
 ---
 
-## Problem Statement
+## Summary
 
-What problem does this solve? Why is it needed?
+One sentence describing the feature.
 
-## Proposed Solution
+## Motivation
 
-Describe the solution you'd like.
+What problem does this solve? Include a concrete example.
 
-## Alternatives Considered
+## Proposed approach
 
-What other approaches did you consider?
+How should it work? Be specific about the API or behavior.
 
-## Scope
+## Alternatives considered
 
-- [ ] This is a spec change (requires `spec_proposal` issue first)
-- [ ] This is a code implementation only
-- [ ] This is documentation only
+What else was considered and why was it rejected?
 
-## Additional Context
+## Scope check
 
-Any other context, mockups, or references.
+- [ ] This does **not** add embeddings, semantic search, or a retrieval engine (out of scope, see SPEC.md §9)
+- [ ] This does **not** add signing/crypto (deferred to v0.2, see SPEC.md §2.2)
+- [ ] This does **not** add an access-control enforcement engine (visibility is a label, see SPEC.md §9)

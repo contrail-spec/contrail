@@ -45,3 +45,6 @@ testdir/
 
 # Tarballs
 *.tgz
+
+# Hermes workspace (local agent plans, not project files)
+.hermes/

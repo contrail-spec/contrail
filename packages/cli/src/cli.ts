@@ -1,8 +1,15 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { createStore, generateULID, type Store } from './index.js';
-import { parseClaim, resolveCurrentBelief, resolveTrajectory } from '@contrail-spec/core';
-import type { Claim, TrajectoryResolutionError } from '@contrail-spec/core';
+import {
+  createStore,
+  generateULID,
+  parseClaim,
+  resolveCurrentBelief,
+  resolveTrajectory,
+  type Store,
+  type Claim,
+  type TrajectoryResolutionError
+} from '@contrail-spec/core';
 
 const program = new Command();
 
@@ -93,6 +100,19 @@ function printBeliefExplanation(claims: Claim[], subject: string, predicate: str
   }
 }
 
+function parseValue(value: string, valueType: string): unknown {
+  switch (valueType) {
+    case 'number':
+      return parseFloat(value);
+    case 'boolean':
+      return value === 'true';
+    case 'list':
+      return value.split(',').map(v => v.trim());
+    default:
+      return value;
+  }
+}
+
 program
   .command('init')
   .description('Initialize a new Contrail store in the current directory')
@@ -127,10 +147,7 @@ program
       id,
       subject: options.subject,
       predicate,
-      value: options.valueType === 'number' ? parseFloat(value) : 
-             options.valueType === 'boolean' ? value === 'true' :
-             options.valueType === 'list' ? value.split(',').map(v => v.trim()) :
-             value,
+      value: parseValue(value, options.valueType),
       value_type: options.valueType,
       confidence,
       valid_from: new Date().toISOString(),

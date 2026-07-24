@@ -1,50 +1,32 @@
----
-name: Pull Request Template
-about: Template for PRs
-title: ""
-labels: ""
-assignees: ""
----
-
 ## Summary
 
-Brief description of what this PR does.
+Brief description of what this PR does and why.
 
-## Related Issues
+## Changes
 
-Fixes #123
-Refs #456
+- 
 
-## Type of Change
+## Type
 
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Documentation update
-- [ ] Spec change (must link spec_proposal issue)
-- [ ] Refactoring
-- [ ] Test improvements
-- [ ] CI/Build changes
-
-## Testing
-
-- [ ] All existing tests pass
-- [ ] New tests added for new functionality
-- [ ] Manual testing performed (describe)
-
-## Spec Changes (if applicable)
-
-- [ ] `spec/schema/v0.1/claim.schema.json` updated
-- [ ] Valid fixtures added to `spec/schema/v0.1/examples/valid/`
-- [ ] Invalid fixtures added to `spec/schema/v0.1/examples/invalid/`
-- [ ] `spec/SPEC.md` updated
-- [ ] `spec/CHANGELOG.md` updated with version bump
+- [ ] `feat` — new feature
+- [ ] `fix` — bug fix
+- [ ] `docs` — documentation only
+- [ ] `refactor` — code change that neither fixes a bug nor adds a feature
+- [ ] `test` — adding or correcting tests
+- [ ] `chore` — build, CI, tooling
+- [ ] `spec` — spec/schema change (requires spec_proposal issue first, per CONTRIBUTING.md)
 
 ## Checklist
 
-- [ ] Commits are signed off (`git commit -s`)
-- [ ] `npm run lint` passes
+- [ ] `npm run build` passes
 - [ ] `npm run typecheck` passes
+- [ ] `npm run lint` passes
 - [ ] `npm run test` passes
-- [ ] `npm run validate:spec` passes
-- [ ] No `any` types without explanatory comment
-- [ ] No breaking changes without MAJOR version discussion
+- [ ] `node scripts/validate-examples.js` passes (if spec/schema files touched)
+- [ ] Tests added for new behavior
+- [ ] DCO sign-off on all commits (`git commit -s`)
+
+## Related issues
+
+Closes #
+Refs #
