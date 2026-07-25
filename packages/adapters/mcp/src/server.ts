@@ -298,6 +298,47 @@ export class ContrailMCPServer {
       };
     };
 
+    const listAllHandler = async (_args: Record<string, unknown>) => {
+      const claims = readClaims(this.storePath);
+      const predicates = new Set<string>();
+      const counts = new Map<string, number>();
+      
+      for (const c of claims) {
+        const key = `${c.subject}/${c.predicate}`;
+        predicates.add(key);
+        counts.set(key, (counts.get(key) ?? 0) + 1);
+      }
+
+      const items = Array.from(predicates).map(key => {
+        const [subject, ...rest] = key.split('/');
+        return { subject: subject!, predicate: rest.join('/'), totalClaims: counts.get(key) ?? 1 };
+      });
+
+      return {
+        content: [{
+          type: 'text' as const,
+          text: JSON.stringify({ totalPredicates: items.length, predicates: items }, null, 2)
+        }]
+      };
+    };
+
+    const searchHandler = async (args: Record<string, unknown>) => {
+      const { query } = args as { query: string };
+      const claims = readClaims(this.storePath);
+      const q = query.toLowerCase();
+      const matches = claims.filter(c =>
+        String(c.value).toLowerCase().includes(q) ||
+        c.predicate.toLowerCase().includes(q) ||
+        c.subject.toLowerCase().includes(q)
+      );
+      return {
+        content: [{
+          type: 'text' as const,
+          text: JSON.stringify({ query, matches: matches.length, results: matches.map(toClaimEvidence) }, null, 2)
+        }]
+      };
+    };
+
     this.server.tool(
       'contrail_remember',
       'Store a new claim about the user',
@@ -335,5 +376,21 @@ export class ContrailMCPServer {
       trajectoryHandler
     );
     this.registerTool('contrail_trajectory', trajectoryHandler);
+
+    this.server.tool(
+      'contrail_list_predicates',
+      'List all subject/predicate pairs with claim counts',
+      {},
+      listAllHandler
+    );
+    this.registerTool('contrail_list_predicates', listAllHandler);
+
+    this.server.tool(
+      'contrail_search',
+      'Search claims by value, predicate, or subject text',
+      { query: z.string().describe('Search text to find in claims') },
+      searchHandler
+    );
+    this.registerTool('contrail_search', searchHandler);
   }
 }

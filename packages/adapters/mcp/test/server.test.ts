@@ -194,4 +194,44 @@ describe('ContrailMCPServer', () => {
     expect(result.isError).toBe(true);
     expect(result.content[0].text).toContain('Multiple heads');
   });
+
+  it('contrail_list_predicates returns empty list on clean store', async () => {
+    const tool = server.getToolHandler('contrail_list_predicates');
+    expect(tool).toBeDefined();
+    const result = await tool.handler({});
+    expect(result.isError).toBeFalsy();
+    const data = JSON.parse(result.content[0].text);
+    expect(data.totalPredicates).toBe(0);
+  });
+
+  it('contrail_list_predicates shows predicates after remembering', async () => {
+    const remember = server.getToolHandler('contrail_remember');
+    await remember.handler({ subject: 'self', predicate: 'preference.editor', value: 'vscode', confidence: 0.9, source_tool: 'test', source_kind: 'explicit-statement' });
+
+    const tool = server.getToolHandler('contrail_list_predicates');
+    const result = await tool.handler({});
+    const data = JSON.parse(result.content[0].text);
+    expect(data.totalPredicates).toBe(1);
+    expect(data.predicates[0].subject).toBe('self');
+    expect(data.predicates[0].predicate).toBe('preference.editor');
+  });
+
+  it('contrail_search finds claims by value text', async () => {
+    const remember = server.getToolHandler('contrail_remember');
+    await remember.handler({ subject: 'self', predicate: 'preference.editor', value: 'neovim', confidence: 0.9, source_tool: 'test', source_kind: 'explicit-statement' });
+    await remember.handler({ subject: 'self', predicate: 'preference.theme', value: 'dark', confidence: 0.9, source_tool: 'test', source_kind: 'explicit-statement' });
+
+    const tool = server.getToolHandler('contrail_search');
+    const result = await tool.handler({ query: 'neovim' });
+    const data = JSON.parse(result.content[0].text);
+    expect(data.matches).toBe(1);
+    expect(data.results[0].value).toBe('neovim');
+  });
+
+  it('contrail_search returns empty for no matches', async () => {
+    const tool = server.getToolHandler('contrail_search');
+    const result = await tool.handler({ query: 'nonexistent' });
+    const data = JSON.parse(result.content[0].text);
+    expect(data.matches).toBe(0);
+  });
 });
