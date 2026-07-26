@@ -26,9 +26,12 @@
     "packages/adapters/*"
   ],
   "scripts": {
-    "build": "npm run build:core && npm run build:engram && npm run build:cli && npm run build:mcp",
+    "build": "npm run build:core && npm run build:engram && npm run build:codex && npm run build:hermes && npm run build:opencode && npm run build:cli && npm run build:mcp",
     "build:core": "npm run build --workspace=@contrail-spec/core --if-present",
     "build:engram": "npm run build --workspace=@contrail-spec/engram --if-present",
+    "build:codex": "npm run build --workspace=@contrail-spec/codex --if-present",
+    "build:hermes": "npm run build --workspace=@contrail-spec/hermes --if-present",
+    "build:opencode": "npm run build --workspace=@contrail-spec/opencode --if-present",
     "build:cli": "npm run build --workspace=@contrail-spec/cli --if-present",
     "build:mcp": "npm run build --workspace=@contrail-spec/mcp --if-present",
     "test": "npm run test --workspaces --if-present",

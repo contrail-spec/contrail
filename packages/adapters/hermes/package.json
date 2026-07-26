@@ -1,7 +1,9 @@
 {
   "name": "@contrail-spec/hermes",
-  "version": "0.2.0",
-  "publishConfig": { "access": "public" },
+  "version": "0.3.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Contrail ↔ Hermes Agent adapter — recall beliefs and build instruction blocks",
   "type": "module",
   "main": "./dist/index.js",
@@ -20,9 +22,11 @@
     "lint": "eslint src"
   },
   "license": "Apache-2.0",
-  "files": [ "dist" ],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "@contrail-spec/core": "^0.2.0"
+    "@contrail-spec/core": "^0.2.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.0",
