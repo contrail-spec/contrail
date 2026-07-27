@@ -1,6 +1,5 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
-import { generateULID } from '@contrail-spec/core';
 import type { Claim } from '@contrail-spec/core';
 import { CLAUDE_MD_TEMPLATE, AGENTS_MD_TEMPLATE, GENERIC_MD_TEMPLATE, type Formatter } from './templates.js';
 
@@ -61,7 +60,7 @@ export class InstructionGenerator {
    * Generates an instruction file for the given target tool.
    * Returns the full generated content (does not write to disk by default).
    */
-  generate(target: InstructionTarget, options?: GenerateOptions): string {
+  generate(target: InstructionTarget, _options?: GenerateOptions): string {
     const claims = this.readAll();
     const lines = this.formatClaims(claims);
     const template = TARGET_TEMPLATE[target];
