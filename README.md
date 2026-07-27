@@ -19,10 +19,24 @@ npx @contrail-spec/cli log project.testing.framework
 
 ## Why Contrail?
 
-Existing memory solutions (Mem0, Zep, Claude Code native memory)
+Contrail started as a fix for a specific problem: Claude Code (via MCP) had
+no way to remember that a project instruction was *replaced*, not just
+supplemented. Existing memory solutions (Mem0, Zep, Claude Code native memory)
 store the **latest value** and forget the past. That works until
 two instructions contradict each other — then the agent picks one
 arbitrarily and you get an incorrect answer.
+
+The core idea — a `supersedes`-linked chain of confidence-weighted claims —
+turned out to be tool-agnostic. Today, Contrail works with:
+
+- **Claude Code** — natively via MCP (Model Context Protocol), no wrapper needed
+- **Codex CLI** — via `@contrail-spec/codex` adapter
+- **Hermes Agent** — via `@contrail-spec/hermes` adapter
+- **OpenCode** — via `@contrail-spec/opencode` adapter
+- *(OpenAI Assistants — in development)*
+
+Each tool gets the same temporal memory. The spec, core library, and JSONL
+store are shared — only the integration layer changes.
 
 Contrail stores **trajectories**: every claim can explicitly replace
 (`supersede`) a previous claim, forming an auditable chain. When
@@ -174,8 +188,11 @@ the same core trajectory logic.
 |---------|-----|-------------|
 | `@contrail-spec/core` | [![npm](https://img.shields.io/npm/v/@contrail-spec/core?color=blue)](https://www.npmjs.com/package/@contrail-spec/core) | Claim validation, trajectory resolution, conflict detection |
 | `@contrail-spec/cli` | [![npm](https://img.shields.io/npm/v/@contrail-spec/cli?color=blue)](https://www.npmjs.com/package/@contrail-spec/cli) | CLI tool (init, add, log, diff) |
-| `@contrail-spec/mcp` | [![npm](https://img.shields.io/npm/v/@contrail-spec/mcp?color=blue)](https://www.npmjs.com/package/@contrail-spec/mcp) | MCP server for Claude Code |
-| `@contrail-spec/engram` | [![npm](https://img.shields.io/npm/v/@contrail-spec/engram?color=blue)](https://www.npmjs.com/package/@contrail-spec/engram) | [EXPERIMENTAL] Engram adapter |
+| `@contrail-spec/mcp` | [![npm](https://img.shields.io/npm/v/@contrail-spec/mcp?color=blue)](https://www.npmjs.com/package/@contrail-spec/mcp) | MCP server — Claude Code native integration |
+| `@contrail-spec/codex` | [![npm](https://img.shields.io/npm/v/@contrail-spec/codex?color=blue)](https://www.npmjs.com/package/@contrail-spec/codex) | Codex CLI adapter |
+| `@contrail-spec/hermes` | [![npm](https://img.shields.io/npm/v/@contrail-spec/hermes?color=blue)](https://www.npmjs.com/package/@contrail-spec/hermes) | Hermes Agent adapter |
+| `@contrail-spec/opencode` | [![npm](https://img.shields.io/npm/v/@contrail-spec/opencode?color=blue)](https://www.npmjs.com/package/@contrail-spec/opencode) | OpenCode CLI adapter |
+| `@contrail-spec/engram` | [![npm](https://img.shields.io/npm/v/@contrail-spec/engram?color=blue)](https://www.npmjs.com/package/@contrail-spec/engram) | [EXPERIMENTAL] Engram envelope adapter |
 
 ## Documentation
 
