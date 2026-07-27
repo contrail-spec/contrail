@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@contrail-spec/core?color=blue)](https://www.npmjs.com/package/@contrail-spec/core)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-42%20passing-brightgreen)](#)
+[![Tests](https://img.shields.io/badge/tests-55%20passing-brightgreen)](#)
 
 AI coding assistants don't remember between sessions. Contrail gives them
 deterministic, auditable memory with **conflict detection** — so when

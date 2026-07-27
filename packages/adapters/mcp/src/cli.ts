@@ -7,7 +7,7 @@ async function main(): Promise<void> {
   await contrail.getServer().connect(transport);
 }
 
-void main().catch((error: unknown) => {
+main().catch((error: unknown) => {
   console.error('Contrail MCP server failed to start:', error);
   process.exitCode = 1;
 });
